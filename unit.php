@@ -17,20 +17,20 @@
 
 <body>
 	
-	<a href="file:///C|/Users/LoneStar/Desktop/Rentals/save_unit.php" title="Add Unit">+add a new Unit</a><br>
-	
+	<a href="add_unit.php" title="Add Unit">+add a new Unit</a><br>
 	
 	<?php
-	
-$conn = new PDO('mysql:host=localhost;dbname=rentals', 'root', '');
-	$conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "select * from units ORDER BY bookTitle";
+        
+	$conn = new PDO('mysql:host=localhost; dbname=rentals_spreadsheet', 'root', '');
+        $conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "select br,unitNum,moving_date,customer,target_date,delivery_instructions,notes, unitID from rental_item ORDER BY unitID";
 	$cmd = $conn->prepare($sql);
+        $cmd->execute(); 
 	$units = $cmd->fetchAll(); 
 	
 	//start the table and add the heading
 	
-	echo '<table >
+	echo '<table class="table table-striped" >
 			<thead>
 					<th>BR.</th>
 					<th>Unit</th>
@@ -39,38 +39,31 @@ $conn = new PDO('mysql:host=localhost;dbname=rentals', 'root', '');
 					<th>Target Date</th>
 					<th>Delivery Instructions</th>
 					<th>Notes</th>
-					
+					<th>Edit</th>
+                                        <th>Delete</th>
 					
 					</thead>
 					<tbody>';
 	
 	foreach($units as $unit){
 		
-			echo '<tr><td>' . $unit['BR'] . '</td>
-			 <tr><td>' . $unit['Unit'] . '</td>
-			 <tr><td>' . $unit['MovingDate'] . '</td>
-			 <tr><td>' . $unit['Customer'] . '</td>
-			 <tr><td>' . $unit['TargetDate'] . '</td>
-		     <tr><td>' . $unit['DeliveryInstructions'] . '</td>
-		     <tr><td>' . $unit['Notes'] . '</td>'
-				;
+		echo '<tr><td>' . $unit['br'] . '</td>
+                    <td>' . $unit['unitNum'] . '</td>
+                    <td>' . $unit['moving_date'] . '</td>
+                    <td>' . $unit['customer'] . '</td>
+                    <td>' . $unit['target_date'] . '</td>
+		    <td>' . $unit['delivery_instructions'] . '</td>
+		    <td>' . $unit['notes'] . '</td>
+
+                    <td><a href="add_unit.php?unitID=' .  $unit['unitID'] .'">Edit</a></td>
+                    <td><a href="delete_unit.php?unitID=' . $unit['unitID'] . '" onclick="return confirm(\'Are you sure?\');">
+                      Delete</a></td></tr>' ;
+        }                 
 			
-	echo '</tbody></table>';
-		
-		
-	}
-	                
-	
-	
+	echo '</tbody></table>';	
+            
+
 	$conn = null; 
-	
-	
-	
-	
-	
-	?>
-	
-	
-	
+?>	
 </body>
 </html>

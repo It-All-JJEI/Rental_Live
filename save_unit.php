@@ -1,131 +1,115 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title> saving unit... </title> 
+      <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="file:///C|/Users/LoneStar/Desktop/Rentals/css/main2.css">
-<title>Untitled Document</title>
+
 </head>
+<body> 
+<a href="unit.php" title="view unit" > View Units </a> 
+<br>
+<a href="add_unit.php" title="add unit" > Add unit<br></a>
 
-<body>
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-	
-	<?php 
-	require_once("dbconfig.php");
-	//init variabes 
-	$br = null; 
-	$unitNum = null; 
-	$moving_date = null; 
-    $customer = null; 
-	$target_date =null; 
-	$delivery_instructions = null;
-	$notes = null; 
-	$unitID = null; 
-	
-	//check if there is numeric id in query string
-	if((!empty($_GET['unitID'])) && (is_numeric($_GET['unitID']))){
-		
-		//stroe in a variable 
-		$unitID = $_GET['untiID'];
-		
-		//select all data for the selected unit
-		$sql = "SELECT * FROM units where unitID = :unitID"; 
-		$cmd = $conn->prepare($sql); 
-		$cmd->BindParam(':unitID', $unitID, PDO::PARAM_INT); 
-		$cmd->execute(); 
-		$units = $cmd->fetchAll(); 
-		
-		//store each value in a variable for each unti by using a loop 
-		foreach($units as $unit){
-			$br = $unit['BR'];
-			$unitNum = $unit['Unit']; 
-			$moving_date = $unit['MovingDate']; 
-			$customer = $unit['Customer']; 
-			$target_date = $unit['TargetDate'];
-			$delivery_instructions = $unit['DeliveryInstructions'];
-			$notes = $unit['Notes']; 
-			$unitID = $unit['UnitID'];
-		}
-		
-		$conn = null; 
-	}
-	
-	?> 
-	
-	<h1>Unit Details</h1>
-	
-	<form action"Unit-View.php" method="post">
-		<fieldset>
-			<label for="br" class="col-sm-2" >BR.</label>
-		<input name="br" id="br" placeholder="Enter the Branch number" required
-			   value-"<?php echo $br ; ?> " />
-		</fieldset>
-		
-		<fieldset>
-			<label for="unitNum" class="col-sm-2">Unit</label>
-		<input name="unitNum" id="unitNum" placeholder="Enter the Unit number" required
-			   value-"<?php echo $unitNum ; ?> " />
-		</fieldset>
-		
-		<fieldset>
-			<label for="moving_date" class="col-sm-2">Moving Date</label>
-		<input name="moving_date" id="moving_date" placeholder="Enter the Moving Date" required
-			   value-"<?php echo $moving_date ; ?> " />
-		</fieldset>
-		
-		<fieldset>
-			<label for="customer" class="col-sm-2">Customer</label>
-		<input name="customer" id="customer" placeholder="Enter the Customer" required
-			   value-"<?php echo $customer ; ?> " />
-		</fieldset>
-		
-		<fieldset>
-			<label for="target_date" class="col-sm-2" >Target Date</label>
-		<input name="target_date"  id="target_date" placeholder="Enter the Target Date" required
-			   value-"<?php echo $target_date ; ?> " />
-		</fieldset>
-		
-		<fieldset>
-			<label for="delivery_instructions" class="col-sm-2">Delivery Instruction</label>
-		<input name="delivery_instructions" id="delivery_instructions" placeholder="Enter the Delivery Instructions" 
-			   value-"<?php echo $delivery_instructions ; ?> " />
-		</fieldset>
-		
-		<fieldset>
-			<label for="notes" class="col-sm-2">Notes</label>
-		<input name="notes" id="notes" placeholder="Enter the Branch number" 
-			   value-"<?php echo $br ; ?> " />
-		</fieldset>
-		
-		<input name="unitID" id="unitID" type="hidden" value="<?php echo $unitID; ?> "/>
-		
-		<button class="btn btn-primary col-sm-offset-2 col-sm-push-100">Submit</button>
-			   
-	</form>
-	
-	
-	
-	
-	
-</body>	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+//store form values in variable 
+$br = $_POST['br'];
+   
+If(isset($_POST['unitNum'])){
+$unitNum = $_POST['unitNum'] ;
+    }
+$moving_date = $_POST['moving_date'];
+$customer = $_POST['customer'];
+$target_date = $_POST['target_date'];
+$delivery_instructions = $_POST['delivery_instructions'];
+$notes = $_POST['notes'];
+ //add unit ID in case of editing        
+$unitID =$_POST['unitID'];
+        
+//create flag to track completion status of the form 
+$flag = true; 
+
+if(empty($br)){
+    echo 'br is required<br />';
+    $flag = false; 
+}
+
+if(empty($moving_date)){
+    echo 'Moving Date is required<br />';
+    $flag = false; 
+}
+if(empty($customer)){
+    echo 'Customer is required<br />';
+    $flag = false; 
+}
+if(empty($target_date)){
+    echo 'Target Date is required<br />';
+    $flag = false; 
+}
+
+
+//save only if the form is complete 
+if($flag){
+   
+    try{
+         $conn = new PDO('mysql:host=localhost; dbname=rentals_spreadsheet', 'root', '');
+    
+    
+      //IF there is already a entry with the unitID then append that unitID, if no unitID is found then create a new ID. this is how the edit workflow is handled    
+    if(empty($unitID)){
+        $sql = "UPDATE rental_item SET br=:br,unitNum=:unitNum,moving_date=:moving_date,customer=:customer,target_date=:target_date,delivery_instructions=:delivery_instructions,notes=:notes where unitID=:unitID";
+        
+       }
+    else{
+        $sql = "INSERT INTO rental_item (br, unitNum, moving_date, customer, target_date, delivery_instructions, notes) VALUES (:br, :unitNum, :moving_date, :customer, :target_date, :delivery_instructions, :notes)";    
+           }
+        
+ 
+        //set up an sql command to save new unit
+   
+    //store sql query inside cmd variable 
+    $cmd= $conn->prepare($sql);
+    
+    //bind named placeholders into variables
+    $cmd->bindParam(':br', $br, PDO::PARAM_INT, 50);
+    $cmd->bindParam(':unitNum', $unitNum, PDO::PARAM_INT, 10);
+    $cmd->bindParam(':moving_date', $moving_date, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':customer', $customer, PDO::PARAM_STR, 25);
+    $cmd->bindParam(':target_date', $target_date, PDO::PARAM_STR, 8); 
+    $cmd->bindParam(':delivery_instructions', $delivery_instructions, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':notes', $notes, PDO::PARAM_STR, 8);
+   // $cmd->bindParam(':unitID', $unitID, PDO::PARAM_INT);
+   
+    if(empty($unitID)){
+        $cmd->bindParam(':unitID', $unitID, PDO::PARAM_INT);
+    }
+    
+    $cmd->execute(); 
+    
+    echo'<p>Unit saved Succesfully!</p>'; 
+    
+    
+   } catch(Exception $e){
+        echo 'Error ' ,$e->getMessage();
+    }
+    
+    $conn = null; 
+//    header("refresh:3;url=unit.php"); 
+}
+else {
+    echo 'failed';
+}
+?>
+</body> 
+
 </html>
