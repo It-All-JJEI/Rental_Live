@@ -1,6 +1,6 @@
 <?php
 
- 
+
   
      function authenticate($user, $password) {
         if (empty($user) || empty($password)) return false; 

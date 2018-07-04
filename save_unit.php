@@ -104,7 +104,7 @@ if($flag){
     }
     
     $conn = null; 
-//    header("refresh:3;url=unit.php"); 
+    header("refresh:3;url=unit.php"); 
 }
 else {
     echo 'failed';

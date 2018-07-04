@@ -3,16 +3,16 @@
 //init session 
 session_start(); 
 
-include 'user.php';
+include('user.php');
 
 //check to see if user is logging out 
 if(isset($_GET['out'])){
     //destroy session 
     session_unset(); 
-    $_SESSIon = array();
+    $_SESSION = array();
      unset($_SESSION['user'], $_SESSION['access']);
      session_destroy();
-     header("location:login.php");
+    header("Location: index.php");
 }
 
 //check to see if login form has been submitted 
@@ -20,12 +20,12 @@ if(isset($_POST['userLogin'])){
     //run information through authenticator 
     if(authenticate($_POST['userLogin'], $_POST['userPassword'])){
         //authentication passwd 
-        header("Location: protected.php");
+        header("Location: unit.php");
         die();
         
     }else{
         //authentication error 
-        $error = 1; 
+        $error = 1 ; 
         
     }
 }
@@ -37,8 +37,7 @@ if(isset($error)) echo 'Login failed: Incorrect username, password or rights <br
 if(isset($_GET['out'])) echo "Logout succesful";
    
 
-?> 
-
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +84,7 @@ if(isset($_GET['out'])) echo "Logout succesful";
         
         <div class="form-group">
             <button type="submit" name="btn-login" class="btn btn-default">
-                	<i class="glyphicon glyphicon-log-in"></i> &nbsp; SIGN IN
+                	<i class="glyphicon glyphicon-log-in"></i> &nbsp; SIGN IN 
             </button>
         </div>  
       	<br />

@@ -17,14 +17,16 @@
 
 <body>
 	
-        
-
-    <a href="login.php?out=1">Logout</a><br>
+	
+        <a href="login.php?out=1"> Logout</a>
 	<?php
-       
+      
+ 
         if($_SESSION['access'] = 2){
         echo '<a href="add_unit.php" title="Add Unit">+add a new Unit</a><br>';
-        }
+        }; 
+        
+      //  include 'protected.php';
         //first table for check ins 
 	$conn = new PDO('mysql:host=localhost; dbname=rentals_spreadsheet', 'root', '');
         $conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -118,3 +120,4 @@
         
 ?>	
 </body>
+</html>
