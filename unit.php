@@ -22,9 +22,9 @@
 	<?php
       
  
-        if($_SESSION['access'] = 2){
+        if(isset($_SESSION['access'] )){
         echo '<a href="add_unit.php" title="Add Unit">+add a new Unit</a><br>';
-        }; 
+        };
         
       //  include 'protected.php';
         //first table for check ins 
@@ -47,8 +47,9 @@
 					<th>Delivery Instructions</th>
 					<th>Notes</th>
 					<th>Edit</th>
+                                      
                                         <th>Delete</th>
-					<th>Move</th> 
+                                      <th>Move</th> 
 					</thead>
 					<tbody>';
 	
@@ -77,8 +78,7 @@
         //second table for check outs 
         
         echo '<h1> Check In </h1>';
-        
-        
+        echo  '<a href="add_unit.php?tableNum" title="Add Unit">+add a new Unit</a><br>';
 	$sql = "select br,unitNum,moving_date,customer,target_date,delivery_instructions,notes, unitID from rental_in ORDER BY unitID";
 	$cmd = $conn->prepare($sql);
         $cmd->execute(); 

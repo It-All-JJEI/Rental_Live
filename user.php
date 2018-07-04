@@ -1,7 +1,5 @@
 <?php
 
-
-  
      function authenticate($user, $password) {
         if (empty($user) || empty($password)) return false; 
         
@@ -18,7 +16,7 @@
         $ldap_user_group = "Domain Users";
                  
         //active directory manager group name 
-        $ldap_manager_group = "IT-All";
+        $ldap_manager_group = "h";
                 
         
         //domain, for purposes of constructing $user 
