@@ -1,43 +1,28 @@
 <?php
 
-require_once 'dbconfig.php';
-
-class USER{ 
-    
-    private $conn;
-    
-    public function __construct(){
-        $database = new Database(); 
-        $db = $database->dbConnectipn(); 
-        $this->conn = $db; 
-        
-    }
-    
-    public function runQuery($sql){
-        $stmt = $this->conn->prepare($sql);
-        return $stmt; 
-    }
-     
-    
-    public function authenticate($user, $password) {
+ 
+  
+     function authenticate($user, $password) {
         if (empty($user) || empty($password)) return false; 
         
         
         //active directory server
-        $ldap_host = " "; 
+        $ldap_host = "jjei.com"; 
         
+//        //actice directory port 
+//        $ldap_port = "389"; 
         //active directory DN (base location of ldap search)
-        $ldap_dn = " ";
+        $ldap_dn = "OU=Users,OU=jj,DC=jjei,DC=com";
         
         //active directory user group 
-        $ldap_user_group = "";
+        $ldap_user_group = "Domain Users";
                  
         //active directory manager group name 
-        $ldap_manager_group = " ";
+        $ldap_manager_group = "IT-All";
                 
         
-        //active directory user group name 
-        $ldap_user_dom = " ";
+        //domain, for purposes of constructing $user 
+        $ldap_user_dom = "@jjei.com";
         
         //connect to actibe directory 
         $ldap = ldap_connect($ldap_host);
@@ -61,6 +46,7 @@ class USER{
             //check groups 
             $access = 0; 
             foreach ($entries[0]['memberof'] as $grps){
+              
                 //is manager break loop 
                 if(strpos($grps, $ldap_manager_group)) {$access = 2; break; }
                 
@@ -78,8 +64,7 @@ class USER{
                 return false; 
             }
             
-            }
-            }
-        
-    }
+          }
+       }
+   
             

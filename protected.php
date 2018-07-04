@@ -10,11 +10,13 @@ if(!isset($_SESSION['user'])){
     
 }
 
-//if($_SESSION['access'] != 2){
-//    //user logged in but not admin 
-//    header("Location: login.php");
-//    
-//    die()
-//} 
+if($_SESSION['access'] != 2){
+    //user logged in but not admin 
+    header("Location: login.php");
+    
+    die();
+} 
+header('Location:unit.php');
 
+?> 
 
