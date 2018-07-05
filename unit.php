@@ -41,9 +41,18 @@
 			<thead>
 					<th>BR.</th>
 					<th>Unit</th>
+                                        <th>OC</th> 
 					<th>Moving Date</th>
 					<th>Customer</th>
 					<th>Target Date</th>
+                                        <th>ETA</th>
+                                        <th>Lease</th>
+                                        <th>Ins.</th>
+                                        <th>Pymt</th>
+                                        <th>Binder</th>
+                                        <th>Check Out Sent </th>
+                                        <th>Check out Rec</th> 
+                                        <th>Training</th>
 					<th>Delivery Instructions</th>
 					<th>Notes</th>
 					<th>Edit</th>
@@ -60,9 +69,19 @@
                     <td>' . $unit['moving_date'] . '</td>
                     <td>' . $unit['customer'] . '</td>
                     <td>' . $unit['target_date'] . '</td>
+                    <td>' . $unit['eta'] . '</td>
+                    <td>' . $unit['ins'] . '</td>
+                    <td>' . $unit['lease'] . '</td>
+                    <td>' . $unit['cyor'] . '</td>
+                    <td>' . $unit['pymt'] . '</td>
+                    <td>' . $unit['binder'] . '</td>
+                    <td>' . $unit['check_in'] . '</td>
+                    <td>' . $unit['check_rec'] . '</td>
+                    <td>' . $unit['training'] . '</td>
 		    <td>' . $unit['delivery_instructions'] . '</td>
 		    <td>' . $unit['notes'] . '</td>
-
+                    
+                                
                     <td><a href="add_unit.php?unitID=' .  $unit['unitID'] .'">Edit</a></td>
                     <td><a href="delete_unit.php?unitID=' . $unit['unitID'] . '" onclick="return confirm(\'Are you sure?\');">
                       Delete</a></td>

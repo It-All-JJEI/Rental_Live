@@ -27,7 +27,17 @@
 	$delivery_instructions = null;
 	$notes = null; 
 	$unitID = null; 
-	
+	$eta = null; 
+        $lease = null; 
+        $ins = null; 
+        $cyor = null; 
+        $pymt = null; 
+        $binder = null ;
+        $check_in = null; 
+        $check_rec = null; 
+        $trainig = null; 
+                
+                
 	//check if there is numeric id in query string
 	if((!empty($_GET['unitID'])) && (is_numeric($_GET['unitID']))){
 		
@@ -53,6 +63,14 @@
 			$delivery_instructions = $unit['delivery_instructions'];
 			$notes = $unit['notes']; 
 			$unitID = $unit['unitID'];
+                        $eta = $unit['eta'];
+                        $lease = $unit['lease']; 
+                        $cyor = $unit['cyor'];
+                        $pymt = $unit['pymt'];
+                        $binder = $unit['binder']; 
+                        $check_in = $unit['check_in'];
+                        $check_rec = $unit['check_rec']; 
+                        $trainig = $unit['training']; 
 		}
 		
 		$conn = null; 
@@ -92,19 +110,66 @@
 			<label for="target_date" class="col-sm-2" >Target Date</label>
 		<input type="date" name="target_date"  id="target_date" placeholder="Enter the Target Date" required
 			   value="<?php echo $target_date ; ?> " />
+		</fieldset> 
+                 <fieldset>
+			<label for="eta" class="col-sm-2">ETA</label>
+                        <input type="date" name="eta" id="eta" placeholder="ETA" 
+			   value="<?php echo $eta ; ?> " />
 		</fieldset>
-		
+             <fieldset>
+			<label for="ins" class="col-sm-2">INS</label>
+                        <input type="checkbox" name="ins" id="ins" placeholder="Insurance" 
+			   value="<?php echo $ins; ?> " />
+		</fieldset>
+            
+                <fieldset>
+			<label for="lease" class="col-sm-2">Lease</label>
+		<input type="checkbox" name="lease" id="lease" placeholder="Lease" 
+			   value="<?php echo $lease ; ?> " />
+		</fieldset>
+                <fieldset>
+			<label for="cyor" class="col-sm-2">CYOR</label>
+		<input type="checkbox" name="cyor" id="cyor" placeholder="CYOR" 
+			   value="<?php echo $cyor; ?> " />
+		</fieldset>
+                <fieldset>
+                            <label for="pymt" class="col-sm-2">Pymt</label>
+                    <input type="checkbox" name="pymt" id="pymt" placeholder="Payment" 
+                               value="<?php echo $pymt ; ?> " />
+                    </fieldset>
+                <fieldset>
+			<label for="binder" class="col-sm-2">Binder</label>
+		<input  type="checkbox" name="binder" id="binder" placeholder="Binder" 
+			   value="<?php echo $binder ; ?> " />
+		</fieldset>
+                <fieldset>
+			<label for="check_in" class="col-sm-2">Check Out Sent</label>
+		<input type="checkbox"  name="check_in" id="check_in" placeholder="Check out sent" 
+			   value="<?php echo $binder ; ?> " />
+		</fieldset>
+                <fieldset>
+			<label for="check_rec" class="col-sm-2">Check out Received</label>
+		<input type="checkbox" name="chec_rec" id="chec_rec" placeholder="Check out Received" 
+			   value="<?php echo $check_rec ; ?> " />
+		</fieldset>
+		 <fieldset>
+			<label for="training" class="col-sm-2">Training</label>
+		<input name="training" id="training" placeholder="Training" 
+			   value="<?php echo $eta ; ?> " />
+		</fieldset>
 		<fieldset>
 			<label for="delivery_instructions" class="col-sm-2">Delivery Instruction</label>
-		<input name="delivery_instructions" id="delivery_instructions" placeholder="Enter the Delivery Instructions" 
+		<input   name="delivery_instructions" id="delivery_instructions" placeholder="Enter the Delivery Instructions" 
 			   value="<?php echo $delivery_instructions ; ?> " />
 		</fieldset>
 		
 		<fieldset>
 			<label for="notes" class="col-sm-2">Notes</label>
-		<input name="notes" id="notes" placeholder="Enter the Branch number" 
+                        <input  name="notes" id="notes" placeholder="Enter the Branch number" 
 			   value="<?php echo $notes ; ?> " />
 		</fieldset>
+                
+               
 		
 		<input name="unitID" id="unitID" type="hidden" value="<?php echo $unitID; ?> "/>
               

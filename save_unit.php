@@ -28,11 +28,50 @@ $br = $_POST['br'];
 If(isset($_POST['unitNum'])){
 $unitNum = $_POST['unitNum'] ;
     }
+   
 $moving_date = $_POST['moving_date'];
+
 $customer = $_POST['customer'];
+
 $target_date = $_POST['target_date'];
+If(isset($_POST['ins'])){
+$ins = $_POST['ins'];
+}
+If(isset($_POST['eta'])){
+$eta = $_POST['eta'];
+}
+If(isset($_POST['lease'])){
+$lease = $_POST['lease'];
+}
+If(isset($_POST['ins'])){
+$ins = $_POST['ins'];
+}
+If(isset($_POST['cyor'])){
+$cyor = $_POST['cyor'];
+}
+If(isset($_POST['pymt'])){
+$pymt = $_POST['pymt'];
+}
+If(isset($_POST['binder'])){
+$binder = $_POST['binder'];
+}
+If(isset($_POST['check_in'])){
+$check_in = $_POST['check_in'];
+}
+If(isset($_POST['check_rec'])){
+$check_rec = $_POST['check_rec'];
+}
+If(isset($_POST['training'])){
+$training = $_POST['training'];
+}
 $delivery_instructions = $_POST['delivery_instructions'];
+
 $notes = $_POST['notes'];
+
+
+
+
+
  //add unit ID in case of editing        
 $unitID =$_POST['unitID'];
         
@@ -67,11 +106,11 @@ if($flag){
     
       //IF there is already a entry with the unitID then append that unitID, if no unitID is found then create a new ID. this is how the edit workflow is handled    
     if(empty($unitID)){
-        $sql = "UPDATE rental_item SET br=:br,unitNum=:unitNum,moving_date=:moving_date,customer=:customer,target_date=:target_date,delivery_instructions=:delivery_instructions,notes=:notes where unitID=:unitID";
+        $sql = "UPDATE rental_item SET br=:br,unitNum=:unitNum,moving_date=:moving_date,customer=:customer,target_date=:target_date,eta=:eta,ins=:ins,lease=:lease,cyor=:cyor,pymt=:pymt,binder=:binder,check_in=:check_in,check_rec=:check_rec,training=:training,delivery_instructions=:delivery_instructions,notes=:notes where unitID=:unitID";
         
        }
     else{
-        $sql = "INSERT INTO rental_item (br, unitNum, moving_date, customer, target_date, delivery_instructions, notes) VALUES (:br, :unitNum, :moving_date, :customer, :target_date, :delivery_instructions, :notes)";    
+        $sql = "INSERT INTO rental_item (br, unitNum, moving_date, customer, target_date,eta,ins,lease,cyor,pymt,binder,check_in,check_rec,training, delivery_instructions, notes) VALUES (:br, :unitNum, :moving_date, :customer, :target_date,:eta,:ins,:lease,:cyor,:pymt,:binder,:check_in,:check_rec,:training, :delivery_instructions, :notes)";    
            }
         
  
@@ -86,9 +125,18 @@ if($flag){
     $cmd->bindParam(':moving_date', $moving_date, PDO::PARAM_STR, 8);
     $cmd->bindParam(':customer', $customer, PDO::PARAM_STR, 25);
     $cmd->bindParam(':target_date', $target_date, PDO::PARAM_STR, 8); 
+    $cmd->bindParam(':eta', $eta, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':lease', $lease, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':ins', $ins, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':cyor', $cyor, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':pymt', $pymt, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':binder', $binder, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':check_in', $check_in, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':check_rec', $check_rec, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':training', $training, PDO::PARAM_STR, 8 );
     $cmd->bindParam(':delivery_instructions', $delivery_instructions, PDO::PARAM_STR, 8);
-    $cmd->bindParam(':notes', $notes, PDO::PARAM_STR, 8);
-   // $cmd->bindParam(':unitID', $unitID, PDO::PARAM_INT);
+    $cmd->bindParam(':notes', $notes, PDO::PARAM_STR, 8);   
+   
    
     if(empty($unitID)){
         $cmd->bindParam(':unitID', $unitID, PDO::PARAM_INT);
@@ -104,7 +152,7 @@ if($flag){
     }
     
     $conn = null; 
-    header("refresh:3;url=unit.php"); 
+   // header("refresh:3;url=unit.php"); 
 }
 else {
     echo 'failed';
