@@ -22,7 +22,7 @@
 	<?php
       
  
-        if(isset($_SESSION['access'] )){
+        if(!isset($_SESSION['access'] )){
         echo '<a href="add_unit.php" title="Add Unit">+add a new Unit</a><br>';
         };
         
@@ -30,7 +30,7 @@
         //first table for check ins 
 	$conn = new PDO('mysql:host=localhost; dbname=rentals_spreadsheet', 'root', '');
         $conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "select br,unitNum,moving_date,customer,target_date,delivery_instructions,notes, unitID from rental_item ORDER BY unitID";
+	$sql = "select br,unitNum,OC,moving_date,customer,target_date,eta,lease,ins,cvor,pymt,binder,check_in,check_rec,training,delivery_instructions,notes, unitID from rental_item ORDER BY unitID";
 	$cmd = $conn->prepare($sql);
         $cmd->execute(); 
 	$units = $cmd->fetchAll(); 
@@ -48,6 +48,7 @@
                                         <th>ETA</th>
                                         <th>Lease</th>
                                         <th>Ins.</th>
+                                        <th>cvor</th>
                                         <th>Pymt</th>
                                         <th>Binder</th>
                                         <th>Check Out Sent </th>
@@ -62,36 +63,37 @@
 					</thead>
 					<tbody>';
 	
-	foreach($units as $unit){
+	foreach($units as $unit){ ?> 
 		
-		echo '<tr><td>' . $unit['br'] . '</td>
-                    <td>' . $unit['unitNum'] . '</td>
-                    <td>' . $unit['moving_date'] . '</td>
-                    <td>' . $unit['customer'] . '</td>
-                    <td>' . $unit['target_date'] . '</td>
-                    <td>' . $unit['eta'] . '</td>
-                    <td>' . $unit['ins'] . '</td>
-                    <td>' . $unit['lease'] . '</td>
-                    <td>' . $unit['cyor'] . '</td>
-                    <td>' . $unit['pymt'] . '</td>
-                    <td>' . $unit['binder'] . '</td>
-                    <td>' . $unit['check_in'] . '</td>
-                    <td>' . $unit['check_rec'] . '</td>
-                    <td>' . $unit['training'] . '</td>
-		    <td>' . $unit['delivery_instructions'] . '</td>
-		    <td>' . $unit['notes'] . '</td>
+		<tr><td><?=$unit['br']?></td>
+                    <td><?=$unit['unitNum']?></td>
+                    <td><?=$unit['OC']?></td>
+                    <td><?=$unit['moving_date'] ?></td>
+                    <td><?=$unit['customer'] ?></td>
+                    <td><?=$unit['target_date'] ?></td>
+                    <td><?=$unit['eta'] ?></td>
+                    <td><input type="checkbox" value="yes"<?=$unit['lease']==1 ? "checked='checked'" : "" ?>></td>
+                    <td><input type="checkbox" "  <?=$unit['ins']==1 ? "checked='checked'" : "" ?>></td>
+                    <td><input type="checkbox" value="yes"<?=$unit['cvor']==1 ? "checked='checked'" : ""?>></td>
+                    <td><input type="checkbox" value="yes"<?=$unit['pymt']==1 ? "checked='checked'" : "" ?>></td>
+                    <td><input type="checkbox" value="yes"<?=$unit['binder']==1 ? "checked='checked'" : ""?>></td>
+                    <td><input  type="checkbox" value="yes" <?=$unit['check_in']==1 ? "checked='checked'" : "" ?> /></td>
+                    <td><input type="checkbox" value="yes"<?=$unit['check_rec']==1 ? "checked='checked'" : "" ?>></td>
+                    <td><?=$unit['training'] ?></td>
+		    <td><?=$unit['delivery_instructions'] ?></td>
+		    <td><?=$unit['notes'] ?></td>
                     
-                                
-                    <td><a href="add_unit.php?unitID=' .  $unit['unitID'] .'">Edit</a></td>
-                    <td><a href="delete_unit.php?unitID=' . $unit['unitID'] . '" onclick="return confirm(\'Are you sure?\');">
+                             
+                    <td><a href="add_unit.php?unitID=<?=   $unit['unitID']?>'">Edit</a></td>
+                    <td><a href="delete_unit.php?unitID=' <?= $unit['unitID'] ?> '" onclick="return confirm(\'Are you sure?\');">
                       Delete</a></td>
-                    <td><a href="move.php?unitID=' . $unit['unitID'] . '" onclick="return confirm(\'Do you want to Move to Check In?\');">Move </a></td></tr>';
+                    <td><a href="move.php?unitID=' <?= $unit['unitID'] ?> '" onclick="return confirm(\'Do you want to Move to Check In?\');">Move </a></td></tr>
                         
-        }                 
+        <?php }                 
 			
 	echo '</tbody></table>';	
             
-
+         
 	 
       
         //second table for check outs 
@@ -130,7 +132,7 @@
 		    <td>' . $unit['delivery_instructions'] . '</td>
 		    <td>' . $unit['notes'] . '</td>
 
-                    <td><a href="add_unit.php?unitID=' .  $unit['unitID'] .'">Edit</a></td>
+                    <td><a href="add_unit.php=' .  $unit['unitID'] .'">Edit</a></td>
                     <td><a href="delete_unit.php?unitID=' . $unit['unitID'] . '" onclick="return confirm(\'Are you sure?\');">
                       Delete</a></td></tr>' ;
         }                 

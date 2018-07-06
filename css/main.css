@@ -1,0 +1,27 @@
+body{
+	margin: 0;
+	
+	background-position: center center;
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover;
+}
+h1{
+	font-weight: 20px;
+	
+	text-align: center;
+}
+
+
+
+thead{
+	color: black;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th{
+	color: black;
+}
+.table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th{
+	color: white;
+        background-color:#adb7b7
+}

@@ -21,6 +21,7 @@
 	//init variabes 
 	$br = null; 
 	$unitNum = null; 
+        $OC = null; 
 	$moving_date = null; 
         $customer = null; 
 	$target_date =null; 
@@ -30,12 +31,12 @@
 	$eta = null; 
         $lease = null; 
         $ins = null; 
-        $cyor = null; 
+        $cvor = null; 
         $pymt = null; 
         $binder = null ;
         $check_in = null; 
         $check_rec = null; 
-        $trainig = null; 
+        $training = null; 
                 
                 
 	//check if there is numeric id in query string
@@ -57,6 +58,7 @@
 		foreach($units as $unit){
 			$br = $unit['br'];
 			$unitNum = $unit['unitNum']; 
+                        $OC = $unit['OC'];
 			$moving_date = $unit['moving_date']; 
 			$customer = $unit['customer']; 
 			$target_date = $unit['target_date'];
@@ -65,7 +67,8 @@
 			$unitID = $unit['unitID'];
                         $eta = $unit['eta'];
                         $lease = $unit['lease']; 
-                        $cyor = $unit['cyor'];
+                        $ins = $unit['ins'];
+                        $cvor = $unit['cvor'];
                         $pymt = $unit['pymt'];
                         $binder = $unit['binder']; 
                         $check_in = $unit['check_in'];
@@ -93,22 +96,26 @@
 		<input name="unitNum" id="unitNum" placeholder="Enter the Unit number" required
 			   value="<?php echo $unitNum ; ?> " />
 		</fieldset>
-		
+		<fieldset>
+			<label for="OC" class="col-sm-2">OC</label>
+                        <input type="date" name="OC" id="OC" placeholder="Enter the OC" 
+			   value="<?php echo $OC ; ?> " />
+		</fieldset>
 		<fieldset>
 			<label for="moving_date" class="col-sm-2">Moving Date</label>
-                        <input type="date" name="moving_date" id="moving_date" placeholder="Enter the Moving Date" required
+                        <input type="date" name="moving_date" id="moving_date" placeholder="Enter the Moving Date" 
 			   value="<?php echo $moving_date ; ?> " />
 		</fieldset>
 		
 		<fieldset>
 			<label for="customer" class="col-sm-2">Customer</label>
-		<input name="customer" id="customer" placeholder="Enter the Customer" required
+		<input name="customer" id="customer" placeholder="Enter the Customer" 
 			   value="<?php echo $customer ; ?> " />
 		</fieldset>
 		
 		<fieldset>
 			<label for="target_date" class="col-sm-2" >Target Date</label>
-		<input type="date" name="target_date"  id="target_date" placeholder="Enter the Target Date" required
+		<input type="date" name="target_date"  id="target_date" placeholder="Enter the Target Date"
 			   value="<?php echo $target_date ; ?> " />
 		</fieldset> 
                  <fieldset>
@@ -116,46 +123,47 @@
                         <input type="date" name="eta" id="eta" placeholder="ETA" 
 			   value="<?php echo $eta ; ?> " />
 		</fieldset>
-             <fieldset>
+    
+                <fieldset>
+			<label for="lease" class="col-sm-2">Lease</label>
+		<input type="checkbox" name="check[]" id="lease" placeholder="Lease" 
+			   value="<?php echo $lease ; ?> " />
+		</fieldset>
+                         <fieldset>
 			<label for="ins" class="col-sm-2">INS</label>
-                        <input type="checkbox" name="ins" id="ins" placeholder="Insurance" 
+                        <input type="checkbox" name="check[]" id="ins" placeholder="Insurance" 
 			   value="<?php echo $ins; ?> " />
 		</fieldset>
             
                 <fieldset>
-			<label for="lease" class="col-sm-2">Lease</label>
-		<input type="checkbox" name="lease" id="lease" placeholder="Lease" 
-			   value="<?php echo $lease ; ?> " />
-		</fieldset>
-                <fieldset>
-			<label for="cyor" class="col-sm-2">CYOR</label>
-		<input type="checkbox" name="cyor" id="cyor" placeholder="CYOR" 
-			   value="<?php echo $cyor; ?> " />
+			<label for="cvor" class="col-sm-2">CVOR</label>
+		<input type="checkbox" name="check[]" id="cvor" placeholder="CYOR" 
+			   value="<?php echo $cvor; ?> " />
 		</fieldset>
                 <fieldset>
                             <label for="pymt" class="col-sm-2">Pymt</label>
-                    <input type="checkbox" name="pymt" id="pymt" placeholder="Payment" 
+                    <input type="checkbox" name="check[]" id="pymt" placeholder="Payment" 
                                value="<?php echo $pymt ; ?> " />
                     </fieldset>
                 <fieldset>
 			<label for="binder" class="col-sm-2">Binder</label>
-		<input  type="checkbox" name="binder" id="binder" placeholder="Binder" 
+		<input  type="checkbox" name="check[]" id="binder" placeholder="Binder" 
 			   value="<?php echo $binder ; ?> " />
 		</fieldset>
                 <fieldset>
 			<label for="check_in" class="col-sm-2">Check Out Sent</label>
-		<input type="checkbox"  name="check_in" id="check_in" placeholder="Check out sent" 
-			   value="<?php echo $binder ; ?> " />
+		<input type="checkbox"  name="check[]" id="check_in" placeholder="Check out sent" 
+			   value="<?php echo $check_in ; ?> " />
 		</fieldset>
                 <fieldset>
 			<label for="check_rec" class="col-sm-2">Check out Received</label>
-		<input type="checkbox" name="chec_rec" id="chec_rec" placeholder="Check out Received" 
+		<input type="checkbox" name="check[]" id="check_rec" placeholder="Check out Received" 
 			   value="<?php echo $check_rec ; ?> " />
 		</fieldset>
 		 <fieldset>
 			<label for="training" class="col-sm-2">Training</label>
 		<input name="training" id="training" placeholder="Training" 
-			   value="<?php echo $eta ; ?> " />
+			   value="<?php echo $training ; ?> " />
 		</fieldset>
 		<fieldset>
 			<label for="delivery_instructions" class="col-sm-2">Delivery Instruction</label>
@@ -173,7 +181,7 @@
 		
 		<input name="unitID" id="unitID" type="hidden" value="<?php echo $unitID; ?> "/>
               
-		<button class="btn btn-primary col-sm-offset-2 col-sm-push-100">Submit</button>
+		<input type="submit" name="btn_save" class="btn btn-primary col-sm-offset-2 col-sm-push-100" >
 			   
 	</form>
 	

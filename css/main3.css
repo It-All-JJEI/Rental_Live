@@ -1,0 +1,28 @@
+body{
+	margin: 0;
+	background-image:url(../images/2.jpg);
+	background-position: center center;
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover;
+}
+p{
+	font-weight: 200px;
+	font-size: 50px;
+	color: #fff;
+	text-align: center;
+	-webkit-text-stroke: 0.5px rgba(0,0,0,0.5);
+	-webkit-text-fill-color: white;
+}
+
+a{
+	color: #FBF9F4;
+	font-weight: 900;
+	padding-bottom: 20px;
+	padding: 5px;
+	margin: 25px;
+}
+
+td{
+	background-color: #000;
+}

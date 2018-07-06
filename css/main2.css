@@ -1,0 +1,31 @@
+body{
+	
+	background-position: center center;
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover;
+}
+h1{
+	font-weight: 200px;
+	color: #fff;
+}
+
+input{
+	width: 30%;
+	padding: 5px;
+	margin: 10px;
+}
+
+label{
+	color: #EDE0C9;
+}
+
+a{
+	color: #FBF9F4;
+	font-weight: 900;
+	padding-left: 25px;
+	padding-bottom: 20px;
+	padding: 5px;
+	margin: 25px;
+	justify-content: center;
+}
