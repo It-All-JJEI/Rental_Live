@@ -127,38 +127,38 @@
                 <fieldset>
 			<label for="lease" class="col-sm-2">Lease</label>
 		<input type="checkbox" name="check[]" id="lease" placeholder="Lease" 
-			   value="<?php echo $lease ; ?> " />
+			   value="lease" <?php echo $lease ; ?> " />
 		</fieldset>
                          <fieldset>
 			<label for="ins" class="col-sm-2">INS</label>
                         <input type="checkbox" name="check[]" id="ins" placeholder="Insurance" 
-			   value="<?php echo $ins; ?> " />
+			   value="ins" <?php echo $ins; ?> " />
 		</fieldset>
             
                 <fieldset>
 			<label for="cvor" class="col-sm-2">CVOR</label>
 		<input type="checkbox" name="check[]" id="cvor" placeholder="CYOR" 
-			   value="<?php echo $cvor; ?> " />
+			   value="cvor"<?php echo $cvor; ?> " />
 		</fieldset>
                 <fieldset>
                             <label for="pymt" class="col-sm-2">Pymt</label>
                     <input type="checkbox" name="check[]" id="pymt" placeholder="Payment" 
-                               value="<?php echo $pymt ; ?> " />
+                               value="pymt"<?php echo $pymt ; ?> " />
                     </fieldset>
                 <fieldset>
 			<label for="binder" class="col-sm-2">Binder</label>
 		<input  type="checkbox" name="check[]" id="binder" placeholder="Binder" 
-			   value="<?php echo $binder ; ?> " />
+			   value="binder"<?php echo $binder ; ?> " />
 		</fieldset>
                 <fieldset>
 			<label for="check_in" class="col-sm-2">Check Out Sent</label>
 		<input type="checkbox"  name="check[]" id="check_in" placeholder="Check out sent" 
-			   value="<?php echo $check_in ; ?> " />
+			   value=check_in"<?php echo $check_in ; ?> " />
 		</fieldset>
                 <fieldset>
 			<label for="check_rec" class="col-sm-2">Check out Received</label>
 		<input type="checkbox" name="check[]" id="check_rec" placeholder="Check out Received" 
-			   value="<?php echo $check_rec ; ?> " />
+			   value="check_rec" <?php echo $check_rec ; ?> " />
 		</fieldset>
 		 <fieldset>
 			<label for="training" class="col-sm-2">Training</label>
