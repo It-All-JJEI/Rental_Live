@@ -100,19 +100,7 @@ if(empty($target_date)){
 }
 
 
-$settingsArray = array('ins', 'lease', 'cvor', 'pymt', 'check_in', 'check_rec');
-if(isset($_POST['btn_save']))
-{ 
-      if(isset( $_POST['check[]']))
-      {  $values = array();
-      foreach($_POST['check[]'] as $selection)
-      {  if(in_array($selection, $settingsArray))
-         {  $values[ $selection ] = 1; }
-         else
-         {  $values[ $selection ] = 0; }
-      } // end of foreach.
 
-      }
 
 
 //save only if the form is complete 
@@ -124,7 +112,7 @@ if($flag){
     
       //IF there is already a entry with the unitID then append that unitID, if no unitID is found then create a new ID. this is how the edit workflow is handled    
     if(empty($unitID)){
-        $sql = "UPDATE rental_item SET br=:br,unitNum=:unitNum,OC=:OC,moving_date=:moving_date,customer=:customer,target_date=:target_date,lease=:lease,eta=:eta,ins=:ins,cvor=:cvor,pymt=:pymt,binder=:binder,check_in=:check_in,check_rec=:check_rec,training=:training,delivery_instructions=:delivery_instructions,notes=:notes where unitID=:unitID";
+        $sql = "UPDATE rental_item SET br=:br,unitNum=:unitNum,OC=:OC,moving_date=:moving_date,customer=:customer,target_date=:target_date,eta=:eta,lease=:lease,ins=:ins,cvor=:cvor,pymt=:pymt,binder=:binder,check_in=:check_in,check_rec=:check_rec,training=:training,delivery_instructions=:delivery_instructions,notes=:notes where unitID=:unitID";
         
        }
     else{
@@ -145,13 +133,13 @@ if($flag){
     $cmd->bindParam(':customer', $customer, PDO::PARAM_STR, 25);
     $cmd->bindParam(':target_date', $target_date, PDO::PARAM_STR, 8); 
     $cmd->bindParam(':eta', $eta, PDO::PARAM_STR, 8);
-    $cmd->bindParam(':lease', $values['lease'], PDO::PARAM_STR, 8);
-    $cmd->bindParam(':ins', $values['ins'], PDO::PARAM_STR, 8);
-    $cmd->bindParam(':cvor', $values['cvor'], PDO::PARAM_STR, 8);
-    $cmd->bindParam(':pymt', $values['pymt'], PDO::PARAM_STR, 8);
-    $cmd->bindParam(':binder', $values['binder'], PDO::PARAM_STR, 8);
-    $cmd->bindParam(':check_in', $values['check_in'], PDO::PARAM_STR, 8);
-    $cmd->bindParam(':check_rec', $values['check_rec'], PDO::PARAM_STR, 8);
+    $cmd->bindParam(':lease', $lease);
+    $cmd->bindParam(':ins', $ins);
+    $cmd->bindParam(':cvor', $cvor);
+    $cmd->bindParam(':pymt', $pymt);
+    $cmd->bindParam(':binder', $binder, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':check_in', $check_in, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':check_rec', $check_rec, PDO::PARAM_STR, 8);
     $cmd->bindParam(':training', $training, PDO::PARAM_STR, 8 );
     $cmd->bindParam(':delivery_instructions', $delivery_instructions, PDO::PARAM_STR, 8);
     $cmd->bindParam(':notes', $notes, PDO::PARAM_STR, 8);   
@@ -171,12 +159,12 @@ if($flag){
     }
     
     $conn = null; 
-   // header("refresh:3;url=unit.php"); 
+    header("refresh:3;url=unit.php"); 
 }
 else {
     echo 'failed';
 }
-}
+
 ?>
 </body> 
 

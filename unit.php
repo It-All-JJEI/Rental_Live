@@ -73,7 +73,7 @@
                     <td><?=$unit['target_date'] ?></td>
                     <td><?=$unit['eta'] ?></td>
                     <td><input type="checkbox" value="yes"<?=$unit['lease']==1 ? "checked='checked'" : "" ?>></td>
-                    <td><input type="checkbox" "  <?=$unit['ins']==1 ? "checked='checked'" : "" ?>></td>
+                    <td><input type="checkbox"   <?=$unit['ins']==1 ? "checked='checked'" : "" ?>></td>
                     <td><input type="checkbox" value="yes"<?=$unit['cvor']==1 ? "checked='checked'" : ""?>></td>
                     <td><input type="checkbox" value="yes"<?=$unit['pymt']==1 ? "checked='checked'" : "" ?>></td>
                     <td><input type="checkbox" value="yes"<?=$unit['binder']==1 ? "checked='checked'" : ""?>></td>

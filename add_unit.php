@@ -48,7 +48,7 @@
                 $conn = new PDO('mysql:host=localhost; dbname=rentals_spreadsheet', 'root', '');
                 $conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		//select all data for the selected unit
-		$sql = "SELECT * FROM rental_item where unitID = :unitID"; 
+		$sql = "SELECT br,unitNum,OC,moving_date,customer,target_date,eta,lease,ins,cvor,pymt,binder,check_in,check_rec,training,delivery_instructions,notes FROM rental_item where unitID = :unitID"; 
 		$cmd = $conn->prepare($sql); 
 		$cmd->BindParam(':unitID', $unitID, PDO::PARAM_INT); 
 		$cmd->execute(); 
@@ -74,10 +74,10 @@
                         $check_in = $unit['check_in'];
                         $check_rec = $unit['check_rec']; 
                         $trainig = $unit['training']; 
-		}
+                
 		
 		$conn = null; 
-	}
+	
 	
 	?> 
 	<a href="unit.php" title="view Units" > View Units </a> <br> 
@@ -99,12 +99,12 @@
 		<fieldset>
 			<label for="OC" class="col-sm-2">OC</label>
                         <input type="date" name="OC" id="OC" placeholder="Enter the OC" 
-			   value="<?php echo $OC ; ?> " />
+                               value="<?php echo strftime('%y-%m-%d', strtotime($unit['OC'])); ?> " />
 		</fieldset>
 		<fieldset>
 			<label for="moving_date" class="col-sm-2">Moving Date</label>
                         <input type="date" name="moving_date" id="moving_date" placeholder="Enter the Moving Date" 
-			   value="<?php echo $moving_date ; ?> " />
+                               value="<?php echo strftime('%Y-%m-%d', strtotime($unit['moving_date'])) ; ?> " />
 		</fieldset>
 		
 		<fieldset>
@@ -126,39 +126,39 @@
     
                 <fieldset>
 			<label for="lease" class="col-sm-2">Lease</label>
-		<input type="checkbox" name="check[]" id="lease" placeholder="Lease" 
-			   value="lease" <?php echo $lease ; ?> " />
+		<input type="checkbox" name="lease" id="lease" placeholder="Lease" 
+			   value="1"<?=$unit['lease']==1 ? "checked='checked'" : "" ?> <?php echo $lease ; ?>  />
 		</fieldset>
                          <fieldset>
 			<label for="ins" class="col-sm-2">INS</label>
-                        <input type="checkbox" name="check[]" id="ins" placeholder="Insurance" 
-			   value="ins" <?php echo $ins; ?> " />
+                        <input type="checkbox" name="ins" id="ins" placeholder="Insurance" 
+			   value="1"<?=$unit['ins']==1 ? "checked='checked'" : "" ?> <?php echo $ins; ?>  />
 		</fieldset>
             
                 <fieldset>
 			<label for="cvor" class="col-sm-2">CVOR</label>
-		<input type="checkbox" name="check[]" id="cvor" placeholder="CYOR" 
-			   value="cvor"<?php echo $cvor; ?> " />
+		<input type="checkbox" name="cvor" id="cvor" placeholder="CYOR" 
+			   value="1"<?=$unit['cvor']==1 ? "checked='checked'" : "" ?><?php echo $cvor; ?>  />
 		</fieldset>
                 <fieldset>
                             <label for="pymt" class="col-sm-2">Pymt</label>
-                    <input type="checkbox" name="check[]" id="pymt" placeholder="Payment" 
-                               value="pymt"<?php echo $pymt ; ?> " />
+                    <input type="checkbox" name="pymt" id="pymt" placeholder="Payment" 
+                            value="1" <?=$unit['pymt']==1 ? "checked='checked'" : "" ?>  <?php echo $pymt ; ?>  />
                     </fieldset>
                 <fieldset>
 			<label for="binder" class="col-sm-2">Binder</label>
-		<input  type="checkbox" name="check[]" id="binder" placeholder="Binder" 
-			   value="binder"<?php echo $binder ; ?> " />
+		<input  type="checkbox" name="binder" id="binder" placeholder="Binder" 
+			 value="1" <?=$unit['binder']==1 ? "checked='checked'" : "" ?> <?php echo $binder ; ?>  />
 		</fieldset>
                 <fieldset>
 			<label for="check_in" class="col-sm-2">Check Out Sent</label>
-		<input type="checkbox"  name="check[]" id="check_in" placeholder="Check out sent" 
-			   value=check_in"<?php echo $check_in ; ?> " />
+		<input type="checkbox"  name="check_in" id="check_in" placeholder="Check out sent" 
+			value="1" <?=$unit['check_in']==1 ? "checked='checked'" : "" ?>  <?php echo $check_in ; ?>  />
 		</fieldset>
                 <fieldset>
 			<label for="check_rec" class="col-sm-2">Check out Received</label>
-		<input type="checkbox" name="check[]" id="check_rec" placeholder="Check out Received" 
-			   value="check_rec" <?php echo $check_rec ; ?> " />
+		<input type="checkbox" name="check_rec" id="check_rec" placeholder="Check out Received" 
+			   value="1" <?=$unit['check_rec']==1 ? "checked='checked'" : "" ?><?php echo $check_rec ; ?>  />
 		</fieldset>
 		 <fieldset>
 			<label for="training" class="col-sm-2">Training</label>
@@ -181,9 +181,9 @@
 		
 		<input name="unitID" id="unitID" type="hidden" value="<?php echo $unitID; ?> "/>
               
-		<input type="submit" name="btn_save" class="btn btn-primary col-sm-offset-2 col-sm-push-100" >
+                <button  class="btn btn-primary col-sm-offset-2 col-sm-push-100" >Submit</button>   
 			   
 	</form>
-	
+        <?php }} ?> 
 </body>		
 </html>
