@@ -7,7 +7,7 @@ body{
 }
 h1{
 	font-weight: 200px;
-	color: #fff;
+	
 }
 
 input{
@@ -16,16 +16,14 @@ input{
 	margin: 10px;
 }
 
-label{
-	color: #EDE0C9;
-}
+
 
 a{
-	color: #FBF9F4;
+	
 	font-weight: 900;
 	padding-left: 25px;
 	padding-bottom: 20px;
 	padding: 5px;
 	margin: 25px;
-	justify-content: center;
+justify-content: center;
 }
