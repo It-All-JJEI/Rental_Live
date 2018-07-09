@@ -20,13 +20,14 @@
 	
         <a href="login.php?out=1"> Logout</a>
 	<?php
-      
+        session_start(); 
+        include 'protected.php';
  
         if(!isset($_SESSION['access'] )){
         echo '<a href="add_unit.php" title="Add Unit">+add a new Unit</a><br>';
         };
         
-      //  include 'protected.php';
+      
         //first table for check ins 
 	$conn = new PDO('mysql:host=localhost; dbname=rentals_spreadsheet', 'root', '');
         $conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -64,7 +65,7 @@
 					<tbody>';
 	
 	foreach($units as $unit){ ?> 
-		
+        <div class="scroll"> 
 		<tr><td><?=$unit['br']?></td>
                     <td><?=$unit['unitNum']?></td>
                     <td><?=$unit['OC']?></td>
@@ -72,23 +73,23 @@
                     <td><?=$unit['customer'] ?></td>
                     <td><?=$unit['target_date'] ?></td>
                     <td><?=$unit['eta'] ?></td>
-                    <td><input type="checkbox" value="yes"<?=$unit['lease']==1 ? "checked='checked'" : "" ?>></td>
-                    <td><input type="checkbox"   <?=$unit['ins']==1 ? "checked='checked'" : "" ?>></td>
-                    <td><input type="checkbox" value="yes"<?=$unit['cvor']==1 ? "checked='checked'" : ""?>></td>
-                    <td><input type="checkbox" value="yes"<?=$unit['pymt']==1 ? "checked='checked'" : "" ?>></td>
-                    <td><input type="checkbox" value="yes"<?=$unit['binder']==1 ? "checked='checked'" : ""?>></td>
-                    <td><input  type="checkbox" value="yes" <?=$unit['check_in']==1 ? "checked='checked'" : "" ?> /></td>
-                    <td><input type="checkbox" value="yes"<?=$unit['check_rec']==1 ? "checked='checked'" : "" ?>></td>
+                    <td><input type="checkbox" value="yes"<?=$unit['lease']==1 ? "checked='checked'" : "" ?> disabled></td>
+                    <td><input type="checkbox"   <?=$unit['ins']==1 ? "checked='checked'" : "" ?> disabled></td>
+                    <td><input type="checkbox" value="yes"<?=$unit['cvor']==1 ? "checked='checked'" : ""?> disabled></td>
+                    <td><input type="checkbox" value="yes"<?=$unit['pymt']==1 ? "checked='checked'" : "" ?> disabled></td>
+                    <td><input type="checkbox" value="yes"<?=$unit['binder']==1 ? "checked='checked'" : ""?> disabled></td>
+                    <td><input  type="checkbox" value="yes" <?=$unit['check_in']==1 ? "checked='checked'" : "" ?> disabled/></td>
+                    <td><input type="checkbox" value="yes"<?=$unit['check_rec']==1 ? "checked='checked'" : "" ?> disabled></td>
                     <td><?=$unit['training'] ?></td>
 		    <td><?=$unit['delivery_instructions'] ?></td>
 		    <td><?=$unit['notes'] ?></td>
                     
                              
-                    <td><a href="add_unit.php?unitID=<?=   $unit['unitID']?>'">Edit</a></td>
-                    <td><a href="delete_unit.php?unitID=' <?= $unit['unitID'] ?> '" onclick="return confirm(\'Are you sure?\');">
+                    <td><a href="add_unit.php?unitID=<?= $unit['unitID']?>">Edit</a></td>
+                    <td><a href="delete_unit.php?unitID=<?= $unit['unitID']  ?>" onclick="return confirm('Are you sure?')">
                       Delete</a></td>
-                    <td><a href="move.php?unitID=' <?= $unit['unitID'] ?> '" onclick="return confirm(\'Do you want to Move to Check In?\');">Move </a></td></tr>
-                        
+                    <td><a href="move.php?unitID=<?= $unit['unitID'] ?>" onclick="return confirm('Do you want to Move to Check In?')">Move </a></td></tr>
+        </div>      
         <?php }                 
 			
 	echo '</tbody></table>';	
@@ -99,8 +100,8 @@
         //second table for check outs 
         
         echo '<h1> Check In </h1>';
-        echo  '<a href="add_unit.php?tableNum" title="Add Unit">+add a new Unit</a><br>';
-	$sql = "select br,unitNum,moving_date,customer,target_date,delivery_instructions,notes, unitID from rental_in ORDER BY unitID";
+        echo  '<a href="add_unit_in.php" title="Add Unit">+add a new Unit</a><br>';
+	$sql = "select br,unitNum,customer,clean_tank,check_in_pics,quote,returned ,unitID from rental_in ORDER BY unitID";
 	$cmd = $conn->prepare($sql);
         $cmd->execute(); 
 	$units = $cmd->fetchAll(); 
@@ -129,11 +130,12 @@
                     <td>' . $unit['unitNum'] . '</td>
                   
                     <td>' . $unit['customer'] . '</td>
-                    <td>' . $unit['target_date'] . '</td>
-		    <td>' . $unit['delivery_instructions'] . '</td>
-		    <td>' . $unit['notes'] . '</td>
+                    <td>' . $unit['clean_tank'] . '</td>
+		    <td>' . $unit['check_in_pics'] . '</td>
+		    <td>' . $unit['quote'] . '</td>
+                    <td>' . $unit['returned'] . '</td>
 
-                    <td><a href="add_unit.php=' .  $unit['unitID'] .'">Edit</a></td>
+                    <td><a href="add_unit_in.php=' .  $unit['unitID'] .'">Edit</a></td>
                     <td><a href="delete_unit.php?unitID=' . $unit['unitID'] . '" onclick="return confirm(\'Are you sure?\');">
                       Delete</a></td></tr>' ;
         }                 

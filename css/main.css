@@ -22,3 +22,9 @@ thead{
 	color: white;
         background-color:#adb7b7
 }
+
+.scroll{ 
+    float: left;
+overflow-y: auto; 
+height: 100px; 
+}
