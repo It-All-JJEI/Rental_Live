@@ -21,7 +21,7 @@
         <a href="login.php?out=1"> Logout</a>
 	<?php
         session_start(); 
-        include 'protected.php';
+        
  
         if(!isset($_SESSION['access'] )){
         echo '<a href="add_unit.php" title="Add Unit">+add a new Unit</a><br>';
@@ -100,7 +100,9 @@
         //second table for check outs 
         
         echo '<h1> Check In </h1>';
+        if(!isset($_SESSION['access'] )){
         echo  '<a href="add_unit_in.php" title="Add Unit">+add a new Unit</a><br>';
+        };
 	$sql = "select br,unitNum,customer,clean_tank,check_in_pics,quote,returned ,unitID from rental_in ORDER BY unitID";
 	$cmd = $conn->prepare($sql);
         $cmd->execute(); 
@@ -124,24 +126,26 @@
 					</thead>
 					<tbody>';
 	
-	foreach($units as $unit){
+	foreach($units as $unit){ ?> 
 		
-		echo '<tr><td>' . $unit['br'] . '</td>
-                    <td>' . $unit['unitNum'] . '</td>
-                  
-                    <td>' . $unit['customer'] . '</td>
-                    <td>' . $unit['clean_tank'] . '</td>
-		    <td>' . $unit['check_in_pics'] . '</td>
-		    <td>' . $unit['quote'] . '</td>
-                    <td>' . $unit['returned'] . '</td>
+		<tr><td><?=$unit['br']?></td>
+                    <td><?=$unit['unitNum']?></td>
+                    <td><?=$unit['customer']?></td>
+                     <td><input type="checkbox" value="yes"<?=$unit['clean_tank']==1 ? "checked='checked'" : ""?> disabled></td>
+                      <td><input type="checkbox" value="yes"<?=$unit['check_in_pics']==1 ? "checked='checked'" : ""?> disabled></td>
+                       <td><input type="checkbox" value="yes"<?=$unit['quote']==1 ? "checked='checked'" : ""?> disabled></td>
+                        <td><input type="checkbox" value="yes"<?=$unit['returned']==1 ? "checked='checked'" : ""?> disabled></td>
+                        
 
+                    
                     <td><a href="add_unit_in.php=' .  $unit['unitID'] .'">Edit</a></td>
                     <td><a href="delete_unit.php?unitID=' . $unit['unitID'] . '" onclick="return confirm(\'Are you sure?\');">
                       Delete</a></td></tr>' ;
-        }                 
-			
-	echo '</tbody></table>';	
+      <?php  }   ?>
         
-?>	
+		
+	</tbody></table>	
+        
+	
 </body>
 </html>

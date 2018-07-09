@@ -50,7 +50,7 @@ if(isset($_GET['out'])) echo "Logout succesful";
 <body>
 
 <div class="signin-form">
-
+    <div class="col-lg-3 col-lg-offset-4"
 	<div class="container">
      
         
@@ -90,7 +90,7 @@ if(isset($_GET['out'])) echo "Logout succesful";
       	<br />
             
       </form>
-
+        </div>
     </div>
     
 </div>
