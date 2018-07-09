@@ -1,21 +1,30 @@
-body{
+/*body{
 	
 	background-position: center center;
   	background-repeat: no-repeat;
   	background-attachment: fixed;
   	background-size: cover;
-}
-h1{
-	font-weight: 200px;
-	
-}
+}*/
+
 
 input{
-	width: 30%;
+	width: 8%;
 	padding: 5px;
 	margin: 10px;
 }
+ checkbox { 
+     
 
+ float: left; 
+ margin: 5px 0px; 
+ 
+ }   
+ 
+ 
+form{
+    align-content: center; 
+    
+}
 
 
 a{
@@ -25,5 +34,10 @@ a{
 	padding-bottom: 20px;
 	padding: 5px;
 	margin: 25px;
-justify-content: center;
+        justify-content: center;
+}
+
+p{
+    -webkit-text-stroke: 0.5px rgba(0,0,0,0.5);
+	-webkit-text-fill-color: white;
 }

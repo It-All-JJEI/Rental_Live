@@ -6,10 +6,11 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
+    <link rel="stylesheet" href="css/main2.css"> 
 <title>Untitled Document</title>
 </head>
 
@@ -80,109 +81,159 @@
 	}
 	
 	?> 
-	<a href="unit.php" title="view Units" > View Units </a> <br> 
-	<h1>Unit Details</h1>
-        
-           
-	<form action="save_unit.php" method="post">
-		<fieldset>
-			<label for="br" class="col-sm-2" >BR.</label>
-                        <input  name="br" id="br" placeholder="Enter the Branch number" required
-			   value="<?php echo $br ; ?> " />
-		</fieldset>
-		
-		<fieldset>
-			<label for="unitNum" class="col-sm-2">Unit</label>
-		<input name="unitNum" id="unitNum" placeholder="Enter the Unit number" required
-			   value="<?php echo $unitNum ; ?> " />
-		</fieldset>
-		<fieldset>
-			<label for="OC" class="col-sm-2">OC</label>
-                        <input type="date" name="OC" id="OC" placeholder="Enter the OC" 
-			   value="<?php echo $OC ; ?> " />
-		</fieldset>
-		<fieldset>
-			<label for="moving_date" class="col-sm-2">Moving Date</label>
-                        <input type="date" name="moving_date" id="moving_date" placeholder="Enter the Moving Date" 
-			   value="<?php echo $moving_date ; ?> " />
-		</fieldset>
-		
-		<fieldset>
-			<label for="customer" class="col-sm-2">Customer</label>
-		<input name="customer" id="customer" placeholder="Enter the Customer" 
-			   value="<?php echo $customer ; ?> " />
-		</fieldset>
-		
-		<fieldset>
-			<label for="target_date" class="col-sm-2" >Target Date</label>
-		<input type="date" name="target_date"  id="target_date" placeholder="Enter the Target Date"
-			   value="<?php echo $target_date ; ?> " />
-		</fieldset> 
-                 <fieldset>
-			<label for="eta" class="col-sm-2">ETA</label>
-                        <input type="date" name="eta" id="eta" placeholder="ETA" 
-			   value="<?php echo $eta ; ?> " />
-		</fieldset>
+	
     
-                <fieldset>
-			<label for="lease" class="col-sm-2">Lease</label>
-		<input type="checkbox" name="lease" id="lease" placeholder="Lease" 
-			   value="1" <?php echo $lease ; ?>  />
-		</fieldset>
-                         <fieldset>
-			<label for="ins" class="col-sm-2">INS</label>
-                        <input type="checkbox" name="ins" id="ins" placeholder="Insurance" 
-			   value="1" <?php echo $ins; ?>  />
-		</fieldset>
-            
-                <fieldset>
-			<label for="cvor" class="col-sm-2">CVOR</label>
-		<input type="checkbox" name="cvor" id="cvor" placeholder="CYOR" 
-			   value="1"<?php echo $cvor; ?>  />
-		</fieldset>
-                <fieldset>
-                            <label for="pymt" class="col-sm-2">Pymt</label>
-                    <input type="checkbox" name="pymt" id="pymt" placeholder="Payment" 
-                               value="1"<?php echo $pymt ; ?>  />
-                    </fieldset>
-                <fieldset>
-			<label for="binder" class="col-sm-2">Binder</label>
-		<input  type="checkbox" name="binder" id="binder" placeholder="Binder" 
-			   value="1"<?php echo $binder ; ?>  />
-		</fieldset>
-                <fieldset>
-			<label for="check_in" class="col-sm-2">Check Out Sent</label>
-		<input type="checkbox"  name="check_in" id="check_in" placeholder="Check out sent" 
-			   value="1"<?php echo $check_in ; ?>  />
-		</fieldset>
-                <fieldset>
-			<label for="check_rec" class="col-sm-2">Check out Received</label>
-		<input type="checkbox" name="check[]" id="check_rec" placeholder="Check out Received" 
-			   value="1" <?php echo $check_rec ; ?>  />
-		</fieldset>
-		 <fieldset>
-			<label for="training" class="col-sm-2">Training</label>
-		<input name="training" id="training" placeholder="Training" 
-			   value="<?php echo $training ; ?> " />
-		</fieldset>
-		<fieldset>
-			<label for="delivery_instructions" class="col-sm-2">Delivery Instruction</label>
-		<input   name="delivery_instructions" id="delivery_instructions" placeholder="Enter the Delivery Instructions" 
-			   value="<?php echo $delivery_instructions ; ?> " />
-		</fieldset>
-		
-		<fieldset>
-			<label for="notes" class="col-sm-2">Notes</label>
-                        <input  name="notes" id="notes" placeholder="Enter the Branch number" 
-			   value="<?php echo $notes ; ?> " />
-		</fieldset>
+	<h1>Unit Details</h1>
+        <aside class="form-group">
+            <a href="unit.php" title="view Units" > View Units </a> <br> 
+        </aside>
+        
+        <div class="col-lg-10 col-lg-offset-2">
+	<form action="save_unit.php" method="post">
+         <div class="messages"></div>
+            <div class="controls"> 
+                <div class="row">
+                    <div class="col-md-2">   
+                        <fieldset class="form-group">
+                            <label  for="br">BR.</label>
+                                    <input  name="br" class="form-control" id="br" rows="" placeholder="Enter the Branch number" required value="<?php echo $br ; ?> " />
+                                    <div class="help-block with-errors"></div>
+                        </fieldset>
+                    </div>
+                    
+                    <div class="col-md-2">        
+                        <fieldset class="form-group">
+                                <label for="unitNum" >Unit</label>
+                        <input name="unitNum" id="unitNum" class="form-control" placeholder="Enter the Unit number" required value="<?php echo $unitNum ; ?> " />
+                                   <div class="help-block with-errors"></div>
+                        </fieldset>
+                    </div>
+                
+                    <div class="col-md-2">
+                        <fieldset class="form-group">
+                                <label for="OC" >OC</label>
+                                <input type="date" name="OC" id="OC" class="form-control" placeholder="Enter the OC" value="<?php echo $OC ; ?> " />
+                                <div class="help-block with-errors"></div>
+                        </fieldset>
+                    </div>
+               
+                    <div class="col-md-2">
+                        <fieldset class="form-group">
+                                <label for="moving_date" >Moving Date</label>
+                                <input type="date" name="moving_date" class="form-control" id="moving_date" placeholder="Enter the Moving Date" value="<?php echo $moving_date ; ?> " />
+                                <div class="help-block with-errors"></div>
+                        </fieldset>
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="col-md-2">      
+                        <fieldset class="form-group">
+                            <label for="customer">Customer</label>
+                            <input name="customer"  class="form-control" id="customer" placeholder="Enter the Customer" value="<?php echo $customer ; ?> " />
+                            <div class="help-block with-errors"></div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-2">
+                        <fieldset class="form-group">
+                        <label for="target_date"  >Target Date</label>
+                        <input type="date" name="target_date" class="form-control" id="target_date" placeholder="Enter the Target Date" value="<?php echo $target_date ; ?> " />
+                        <div class="help-block with-errors"></div>
+                        </fieldset> 
+                    </div>
                 
                
-		
+                    <div class="col-md-2">
+                        <fieldset class="form-group">
+                               <label for="eta" >ETA</label>
+                               <input type="date" name="eta" class="form-control" id="eta" placeholder="ETA" value="<?php echo $eta ; ?> " />
+                               <div class="help-block with-errors"></div>
+                       </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                
+                    <div class="col-md-1">
+                        <fieldset class="form-check form-check-inline">
+                                <label for="lease" >Lease</label>
+                                <input type="checkbox" name="lease" class="form-check-input" id="lease" placeholder="Lease" value="1" <?php echo $lease ; ?>  />
+                                <div class="help-block with-errors"></div>
+                        </fieldset>
+                    </div>
+              
+                
+                    <div class="col-md-1">
+                         <fieldset class="form-check form-check-inline">
+                            <label for="ins">INS</label>
+                            <input type="checkbox" name="ins" class="form-control" id="ins" placeholder="Insurance" value="1" <?php echo $ins; ?>  />
+                            <div class="help-block with-errors"></div>
+                        </fieldset>
+                    </div>   
+                    <div class="col-md-1"> 
+                        <fieldset class="form-check form-check-inline">
+                            <label for="cvor">CVOR</label>
+                            <input type="checkbox" name="cvor" class="form-control" id="cvor" placeholder="CVOR" value="1"<?php echo $cvor; ?>  />
+                            <div class="help-block with-errors"></div>
+                        </fieldset>
+                    </div>
+                
+               
+                    <div class="col-md-1"> 
+                        <fieldset class="form-check form-check-inline">
+                                <label for="pymt">Pymt</label>
+                                <input type="checkbox" name="pymt" class="form-control" id="pymt" placeholder="Payment" value="1"<?php echo $pymt ; ?>  />
+                                <div class="help-block with-errors"></div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-1">
+                            <fieldset class="form-check form-check-inline">
+                                 <label for="binder" >Binder</label>
+                                <input  type="checkbox" name="binder" class="form-control" id="binder" placeholder="Binder" value="1"<?php echo $binder ; ?>  />
+                                <div class="help-block with-errors"></div>
+                            </fieldset>
+                    </div>
+                    <div class="col-md-1">
+                            <fieldset class="form-check form-check-inline">
+                                    <label for="check_in">Check Out Sent</label>
+                                    <input type="checkbox"  name="check_in" id="check_in" class="form-control" placeholder="Check out sent" value="1"<?php echo $check_in ; ?>  />
+                                    <div class="help-block with-errors"></div>
+                            </fieldset>
+                    </div>
+                    <div class="col-md-1">
+                            <fieldset class="form-check form-check-inline">
+                                <label for="check_rec" >Check out Received</label>
+                                <input type="checkbox" name="check[]" id="check_rec" placeholder="Check out Received" class="form-control" value="1" <?php echo $check_rec ; ?>  />
+                                <div class="help-block with-errors"></div>
+                            </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            <fieldset class="form-check form-check-inline">
+                                   <label for="training" >Training</label>
+                           <input name="training" id="training" placeholder="Training" class="form-control" value="<?php echo $training ; ?> " />
+                           <div class="help-block with-errors"></div>
+                           </fieldset>
+                    </div>
+                    <div class="col-md-8">
+                        <fieldset class="form-check form-check-inline">
+                                <label for="delivery_instructions" >Delivery Instruction</label>
+                                <textarea  name="delivery_instructions" class="form-control" id="delivery_instructions" rows="4" placeholder="Enter the Delivery Instructions" value="<?php echo $delivery_instructions ; ?> " /></textarea>
+                        <div class="help-block with-errors"></div>
+                        </fieldset>
+                        <div class="col-md-8">
+                            <fieldset class="form-check form-check-inline">
+                                    <label for="notes" >Notes</label>
+                                    <textarea  name="notes" class="form-control" id="notes" placeholder="Enter Notes" rows="4" value="<?php echo $notes ; ?> " /></textarea> 
+                                    <div class="help-block with-errors">    </div>
+                            </fieldset>
+                        </div>
+                    </div>
+               
+                </div>  
 		<input name="unitID" id="unitID" type="hidden" value="<?php echo $unitID; ?> "/>
               
 		<input type="submit" name="btn_save" class="btn btn-primary col-sm-offset-2 col-sm-push-100" >
-			   
+            </div> 		   
 	</form>
 	
 </body>		

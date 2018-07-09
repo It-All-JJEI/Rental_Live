@@ -111,11 +111,12 @@
 			<thead>
 					<th>BR.</th>
 					<th>Unit</th>
-					<th>Moving Date</th>
+					
 					<th>Customer</th>
-					<th>Target Date</th>
-					<th>Delivery Instructions</th>
-					<th>Notes</th>
+					<th>Clean Tank Cert</th>
+					<th>Check in With Pics </th>
+					<th>Quote Sent </th>
+                                        <th>Returned</th> 
 					<th>Edit</th>
                                         <th>Delete</th>
 					
@@ -126,7 +127,7 @@
 		
 		echo '<tr><td>' . $unit['br'] . '</td>
                     <td>' . $unit['unitNum'] . '</td>
-                    <td>' . $unit['moving_date'] . '</td>
+                  
                     <td>' . $unit['customer'] . '</td>
                     <td>' . $unit['target_date'] . '</td>
 		    <td>' . $unit['delivery_instructions'] . '</td>
