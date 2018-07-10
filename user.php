@@ -16,7 +16,7 @@
         $ldap_user_group = "Domain Users";
                  
         //active directory manager group name 
-        $ldap_manager_group = "h";
+        $ldap_manager_group = "Rentals";
                 
         
         //domain, for purposes of constructing $user 

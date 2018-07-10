@@ -1,10 +1,15 @@
-/*body{
+@charset "utf-8";
+/* CSS Document */
+
+
+body{
 	
+	background-image:url(../css/images/background.jpg);
 	background-position: center center;
   	background-repeat: no-repeat;
   	background-attachment: fixed;
   	background-size: cover;
-}*/
+}
 
 
 input{

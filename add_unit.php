@@ -87,7 +87,8 @@
         <aside class="form-group">
             <a href="unit.php" title="view Units" > View Units </a> <br> 
         </aside>
-        
+        <div class="panel panel-default" > 
+            <div class="panel-body">
         <div class="col-lg-8 col-lg-offset-3">
 	<form action="save_unit.php" method="post">
          <div class="messages"></div>
@@ -242,7 +243,9 @@
 		<input name="unitID" id="unitID" type="hidden" value="<?php echo $unitID; ?> "/>
               
 		<input type="submit" name="btn_save" class="btn btn-primary col-sm-offset-2 col-sm-push-100" >
-            </div> 		   
+            </div> 	
+            </div> 
+        </div>
 	</form>
 	
 </body>		
