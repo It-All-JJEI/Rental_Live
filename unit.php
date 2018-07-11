@@ -92,7 +92,7 @@
 		    <td><?=$unit['delivery_instructions'] ?></td>
 		    <td><?=$unit['notes'] ?></td>
                     
-                   <?php if(!isset($_SESSION['access'] )){ ?> 
+                   <?php if(($_SESSION['access'] =2)){ ?> 
                     <!--add in editing buttons for editing deleting and checking in  -->         
                     <td><a href="add_unit.php?unitID=<?= $unit['unitID']?>">Edit</a></td>
                     <td><a href="delete_unit.php?unitID=<?= $unit['unitID']  ?>" onclick="return confirm('Are you sure?')">
@@ -143,8 +143,8 @@
                      <td><input type="checkbox" value="yes"<?=$unit['check_in_pics']==1 ? "checked='checked'" : ""?> disabled></td>
                      <td><input type="checkbox" value="yes"<?=$unit['quote']==1 ? "checked='checked'" : ""?> disabled></td>
                      <td><input type="checkbox" value="yes"<?=$unit['returned']==1 ? "checked='checked'" : ""?> disabled></td>
-                    <td><a href="add_unit_in.php=' .  $unit['unitID'] .'">Edit</a></td>
-                    <td><a href="delete_unit.php?unitID=' . $unit['unitID'] . '" onclick="return confirm(\'Are you sure?\');">
+                    <td><a href="add_unit_in.php?unitID=<?=$unit['unitID']?>">Edit</a></td>
+                    <td><a href="delete_unit.php?unitID=<?=$unit['unitID']?>" onclick="return confirm(\'Are you sure?\');">
                       Delete</a></td></tr>' ;
       <?php  }   ?>
         

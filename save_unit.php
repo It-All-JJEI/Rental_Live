@@ -18,7 +18,7 @@
 <a href="add_unit.php" title="add unit" > Add unit<br></a>
 
 <?php 
-
+include('inputLog.php');
 
 //store form values in variable 
 $br = $_POST['br'];
@@ -122,7 +122,7 @@ if($flag){
    
     //store sql query inside cmd variable 
     $cmd= $conn->prepare($sql);
-    
+    writeTOFile($sql);
     //bind named placeholders into variables
     $cmd->bindParam(':br', $br, PDO::PARAM_INT, 50);
     $cmd->bindParam(':unitNum', $unitNum, PDO::PARAM_INT, 10);
@@ -157,7 +157,7 @@ if($flag){
     }
     
     $conn = null; 
-    header("refresh:3;url=unit.php"); 
+    header("refresh:1;url=unit.php"); 
 }
 else {
     echo 'failed';
