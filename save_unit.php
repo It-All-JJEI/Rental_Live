@@ -18,7 +18,10 @@
 <a href="add_unit.php" title="add unit" > Add unit<br></a>
 
 <?php 
-include('inputLog.php');
+ini_set("display_errors",1);
+       error_reporting(E_ALL);
+ session_start();
+//include('inputLog.php');
 
 //store form values in variable 
 $br = $_POST['br'];
@@ -80,23 +83,14 @@ $unitID =$_POST['unitID'];
 $flag = true; 
 
 if(empty($br)){
-    echo 'br is required<br />';
+    echo 'BR. is a required Field<br />';
     $flag = false; 
 }
 
-if(empty($moving_date)){
-    echo 'Moving Date is required<br />';
+if(empty($unitNum)){
+    echo 'Unit is a required Field <br />';
     $flag = false; 
 }
-if(empty($customer)){
-    echo 'Customer is required<br />';
-    $flag = false; 
-}
-if(empty($target_date)){
-    echo 'Target Date is required<br />';
-    $flag = false; 
-}
-
 
 
 
@@ -105,7 +99,8 @@ if(empty($target_date)){
 if($flag){
    
     try{
-         $conn = new PDO('mysql:host=localhost; dbname=rentals_spreadsheet', 'root', '');
+        $conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
+		$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     
     
       //IF there is already a entry with the unitID then append that unitID, if no unitID is found then create a new ID. this is how the edit workflow is handled    
@@ -122,31 +117,31 @@ if($flag){
    
     //store sql query inside cmd variable 
     $cmd= $conn->prepare($sql);
-    writeTOFile($sql);
+   // writeTOFile($sql);
     //bind named placeholders into variables
-    $cmd->bindParam(':br', $br, PDO::PARAM_INT, 50);
-    $cmd->bindParam(':unitNum', $unitNum, PDO::PARAM_INT, 10);
-    $cmd->bindParam(':OC', $OC, PDO::PARAM_STR,10);
-    $cmd->bindParam(':moving_date', $moving_date, PDO::PARAM_STR, 8);
-    $cmd->bindParam(':customer', $customer, PDO::PARAM_STR, 25);
-    $cmd->bindParam(':target_date', $target_date, PDO::PARAM_STR, 8); 
-    $cmd->bindParam(':eta', $eta, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':br', $br, PDO::PARAM_INT);
+    $cmd->bindParam(':unitNum', $unitNum, PDO::PARAM_INT);
+    $cmd->bindParam(':OC', $OC, PDO::PARAM_STR);
+    $cmd->bindParam(':moving_date', $moving_date, PDO::PARAM_STR);
+    $cmd->bindParam(':customer', $customer, PDO::PARAM_STR);
+    $cmd->bindParam(':target_date', $target_date, PDO::PARAM_STR); 
+    $cmd->bindParam(':eta', $eta, PDO::PARAM_STR);
     $cmd->bindParam(':lease', $lease);
     $cmd->bindParam(':ins', $ins);
     $cmd->bindParam(':cvor', $cvor);
     $cmd->bindParam(':pymt', $pymt);
-    $cmd->bindParam(':binder', $binder, PDO::PARAM_STR, 8);
-    $cmd->bindParam(':check_in', $check_in, PDO::PARAM_STR, 8);
-    $cmd->bindParam(':check_rec', $check_rec, PDO::PARAM_STR, 8);
-    $cmd->bindParam(':training', $training, PDO::PARAM_STR, 8 );
-    $cmd->bindParam(':delivery_instructions', $delivery_instructions, PDO::PARAM_STR, 8);
-    $cmd->bindParam(':notes', $notes, PDO::PARAM_STR, 8);   
+    $cmd->bindParam(':binder', $binder, PDO::PARAM_STR);
+    $cmd->bindParam(':check_in', $check_in, PDO::PARAM_STR);
+    $cmd->bindParam(':check_rec', $check_rec, PDO::PARAM_STR);
+    $cmd->bindParam(':training', $training, PDO::PARAM_STR);
+    $cmd->bindParam(':delivery_instructions', $delivery_instructions, PDO::PARAM_STR);
+    $cmd->bindParam(':notes', $notes, PDO::PARAM_STR);   
    
-   
+   //bind variable to named place holder ands save inside cmd 
     if(empty($unitID)){
         $cmd->bindParam(':unitID', $unitID, PDO::PARAM_INT);
     }
-    
+    //execute query 
     $cmd->execute(); 
     
     echo'<p>Unit saved Succesfully!</p>'; 

@@ -7,8 +7,6 @@
         //active directory server
         $ldap_host = "jjei.com"; 
         
-//        //actice directory port 
-//        $ldap_port = "389"; 
         //active directory DN (base location of ldap search)
         $ldap_dn = "OU=Users,OU=jj,DC=jjei,DC=com";
         
@@ -22,14 +20,14 @@
         //domain, for purposes of constructing $user 
         $ldap_user_dom = "@jjei.com";
         
-        //connect to actibe directory 
+        //connect to active directory 
         $ldap = ldap_connect($ldap_host);
         
         ldap_set_option($ldap,LDAP_OPT_PROTOCOL_VERSION, 3); 
         ldap_set_option($ldap, LDAP_OPT_REFERRALS,0); 
         
         
-        //verigy user and password 
+        //verify user and password 
         if($bind = @ldap_bind($ldap, $user.$ldap_user_dom, $password)) { 
             
             //valid 

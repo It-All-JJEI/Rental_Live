@@ -19,7 +19,7 @@
 	
 	<?php 
 	
-	//init variabes 
+	//init variabes and keep them null to not bring over variables from last entery
 	$br = null; 
 	$unitNum = null; 
         $OC = null; 
@@ -46,8 +46,8 @@
 		//stroe in a variable 
 		$unitID = $_GET['unitID'];
 		
-                $conn = new PDO('mysql:host=localhost; dbname=rentals_spreadsheet', 'root', '');
-                $conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         $conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
+		$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 		//select all data for the selected unit
 		$sql = "SELECT * FROM rental_item where unitID = :unitID"; 
 		$cmd = $conn->prepare($sql); 
@@ -82,7 +82,7 @@
 	
 	?> 
 	
-    
+    <!-- create form for data entry --> 
 	<h1>Unit Details</h1>
         <aside class="form-group">
             <a href="unit.php" title="view Units" > View Units </a> <br> 

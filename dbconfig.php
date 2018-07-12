@@ -1,23 +1,23 @@
 <?php
 
 //create variables for the connection==
-class Database
+class Database extends PDO 
 {
-	private $host = "localhost";
-	private $db_name = "Rentals_spreadsheet";
-	private $username = "root";
-	private $pass= " " ;
+	private $host = "SQL-PRD-01";
+	private $db_name = "Rentals_Spreadsheet";
+	private $username = "sa";
+	private $pass= "Truck34sail" ;
 	public $conn;
 
 
 //try to connect to database if not throw exception 
-public function dbConnection()
+public function __construct($conn)
 {
 	$this->conn = null; 
 	
 	try{
-		$this->conn = new PDO("mysqli:host=" . $this->host . ";dbname=" . 
-	    $this->db_name, $this->username, $this->password);
+		$this->conn = new PDO("sqlsrv:Server=" . $this->host . ";Database=" . 
+	    $this->db_name, $this->username, $this->pass);
 		$this->conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 		
 	}catch(PDOException $exception)
@@ -26,5 +26,7 @@ public function dbConnection()
 		
 		
  }
+ 
+
 }
 ?>

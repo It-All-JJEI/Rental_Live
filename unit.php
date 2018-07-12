@@ -21,23 +21,24 @@
 	
  <!--Start of PHP -->
 	<?php
- 
-        session_start();
-        
+
+include('user.php');
+
+  
+     
       //if the user has the required access level they will be able to view the add unit button ie rentals only 
-           if($_SESSION['access'] =2 ){
+           if($_SESSION['access'] = 2 ){
         echo '<a href="add_unit.php" class="btn btn-default col-sm-push-100"  title="Add Unit">+add a new Unit</a><br>';
        
         };
-       
+  
         
-        //Open connection to the database and add error mode
-	$conn = new PDO('mysql:host=localhost; dbname=rentals_spreadsheet', 'root', '');
-        $conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //create query for table then prepare the statment inside the connection variable and execute through the cmd variable 
+    //Open connection to the database and add error mode
+	$conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
+	$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 	$sql = "select br,unitNum,OC,moving_date,customer,target_date,eta,lease,ins,cvor,pymt,binder,check_in,check_rec,training,delivery_instructions,notes, unitID from rental_item ORDER BY unitID";
 	$cmd = $conn->prepare($sql);
-        $cmd->execute(); 
+    $cmd->execute(); 
         //fetch all rows from the table and store them inside $units
 	$units = $cmd->fetchAll(); 
 	
@@ -51,25 +52,22 @@
 					<th>Moving Date</th>
 					<th>Customer</th>
 					<th>Target Date</th>
-                                        <th>ETA</th>
-                                        <th>Lease</th>
-                                        <th>Ins.</th>
-                                        <th>cvor</th>
-                                        <th>Pymt</th>
-                                        <th>Binder</th>
-                                        <th>Check Out Sent </th>
-                                        <th>Check out Rec</th> 
-                                        <th>Training</th>
+					<th>ETA</th>
+					<th>Lease</th>
+					<th>Ins.</th>
+					<th>cvor</th>
+					<th>Pymt</th>
+					<th>Binder</th>
+					<th>Check Out Sent </th>
+					<th>Check out Rec</th> 
+					<th>Training</th>
 					<th>Delivery Instructions</th>
 					<th>Notes</th>
-					
-
-                                    
-                                         <th>Edit</th>                                 
-                                        <th>Delete</th>
-                                      <th>Check In</th> 
+					<th>Edit</th>                                 
+					<th>Delete</th>
+					<th>Check In</th> 
 					</thead>
-					<tbody>';
+					</tbody>';
 	//loop through $units and pull out individual columns and format them
 	foreach($units as $unit){ ?> 
         <div class="scroll"> 
@@ -104,11 +102,11 @@
 			
 	echo '</tbody></table>';	
        
-        //second table for check in create headinh 
+        //second table for check in create heading
         
         echo '<h1> Check In </h1>';
         if($_SESSION['access'] =2){
-        echo  '<a href="add_unit_in.php" class="btn btn-default col-sm-push-100" title="Add Unit">+add a new Unit</a><br>' ;
+        echo  '<a href="add_unit_in.php" class="btn btn-default col-sm-push-100" title="Add Unit">+add a new Unit</a><br>';
         };
         //create query for table then prepare the statment inside the connection variable and execute through the cmd variable 
 	$sql = "select br,unitNum,customer,clean_tank,check_in_pics,quote,returned ,unitID from rental_in ORDER BY unitID";
@@ -131,8 +129,7 @@
 					<th>Edit</th>
                                         <th>Delete</th>
 					
-					</thead>
-					<tbody>';
+					</thead>';
 	
 	foreach($units as $unit){ ?> 
 		<!--loop through units and get individual columns --> 
@@ -144,8 +141,8 @@
                      <td><input type="checkbox" value="yes"<?=$unit['quote']==1 ? "checked='checked'" : ""?> disabled></td>
                      <td><input type="checkbox" value="yes"<?=$unit['returned']==1 ? "checked='checked'" : ""?> disabled></td>
                     <td><a href="add_unit_in.php?unitID=<?=$unit['unitID']?>">Edit</a></td>
-                    <td><a href="delete_unit.php?unitID=<?=$unit['unitID']?>" onclick="return confirm(\'Are you sure?\');">
-                      Delete</a></td></tr>' ;
+                    <td><a href="delete_from_in.php?unitID=<?=$unit['unitID']?>" onclick="return confirm('Are you sure?');">
+                      Delete</a></td></tr>
       <?php  }   ?>
         
 		

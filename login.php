@@ -2,7 +2,8 @@
 
 //init session 
 session_start(); 
-
+error_reporting(E_ALL); 
+ini_set('display_errors', 1);
 include('user.php');
 
 //check to see if user is logging out 
@@ -25,13 +26,13 @@ if(isset($_POST['userLogin'])){
         
     }else{
         //authentication error 
-        $error = 1 ; 
+        $error = 1; 
         
     }
 }
 
 //output error to user 
-if(isset($error)) echo 'Login failed: Incorrect username, password or rights <br />';
+if(isset($error)) echo 'Login failed: Incorrect username, password or rights <br/>';
 
 //output logoutsuccess 
 if(isset($_GET['out'])) echo "Logout succesful";
@@ -71,7 +72,7 @@ if(isset($_GET['out'])) echo "Logout succesful";
 			}
 		?>
         </div>
-        
+        <!-- create form -->
         <div class="form-group">
         <input type="text" class="form-control" name="userLogin" placeholder="Username" required />
         <span id="check-e"></span>

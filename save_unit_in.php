@@ -26,11 +26,6 @@ $br = $_POST['br'];
 If(isset($_POST['unitNum'])){
 $unitNum = $_POST['unitNum'] ;
     }
-   
-
-
-
-
 If(isset($_POST['customer'])){
 $binder = $_POST['customer'];
 }
@@ -43,7 +38,6 @@ $check_rec = $_POST['check_in_pics'];
 If(isset($_POST['quote'])){
 $training = $_POST['quote'];
 }
-
 If(isset($_POST['returned'])){
 $training = $_POST['returned'];
 }
@@ -71,14 +65,15 @@ if(empty($unitNum)){
 
 
 
-//save only if the form is complete 
+//save only if the form is complete and flag is true 
 if($flag){
    
     try{
-         $conn = new PDO('mysql:host=localhost; dbname=rentals_spreadsheet', 'root', '');
+        $conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
+	$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     
     
-      //IF there is already a entry with the unitID then append that unitID, if no unitID is found then create a new ID. this is how the edit workflow is handled    
+      //IF there is already a entry with the unitID then append that row, if no unitID is found then create a new ID and row. this is how the edit workflow is handled    
     if(empty($unitID)){
         $sql = "UPDATE rental_in SET br=:br,unitNum=:unitNum,customer=:customer,clean_tank=:clean_tank,check_in_pics=:check_in_pics,quote=:quote,returned=:returned  where unitID=:unitID";
         
@@ -88,26 +83,26 @@ if($flag){
           }
         
  
-        //set up an sql command to save new unit
+        
    
     //store sql query inside cmd variable 
     $cmd= $conn->prepare($sql);
     
     //bind named placeholders into variables
-    $cmd->bindParam(':br', $br, PDO::PARAM_INT, 50);
-    $cmd->bindParam(':unitNum', $unitNum, PDO::PARAM_INT, 10);
-    $cmd->bindParam(':customer', $customer, PDO::PARAM_STR, 25);
-    $cmd->bindParam(':clean_tank', $clean_tank, PDO::PARAM_STR, 8); 
-    $cmd->bindParam(':check_in_pics', $check_in_pics, PDO::PARAM_STR, 8);
+    $cmd->bindParam(':br', $br, PDO::PARAM_INT);
+    $cmd->bindParam(':unitNum', $unitNum, PDO::PARAM_INT);
+    $cmd->bindParam(':customer', $customer, PDO::PARAM_STR);
+    $cmd->bindParam(':clean_tank', $clean_tank, PDO::PARAM_STR); 
+    $cmd->bindParam(':check_in_pics', $check_in_pics, PDO::PARAM_STR);
     $cmd->bindParam(':quote', $quote);
     $cmd->bindParam(':returned', $returned);
     
    
-   
+   //bind all paramaters to the variables and save 
     if(empty($unitID)){
         $cmd->bindParam(':unitID', $unitID, PDO::PARAM_INT);
     }
-    
+    //execute query 
     $cmd->execute(); 
     
     echo'<p>Unit saved Succesfully!</p>'; 
@@ -116,9 +111,9 @@ if($flag){
    } catch(Exception $e){
         echo 'Error ' ,$e->getMessage();
     }
-    
+    //disconnect and redirect to unit
     $conn = null; 
-    header("refresh:3;url=unit.php"); 
+    header("refresh:1;url=unit.php"); 
 }
 else {
     echo 'failed';
