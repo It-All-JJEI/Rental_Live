@@ -4,11 +4,6 @@
 ini_set("display_errors",1);
  error_reporting(E_ALL);
 session_start(); 
-<<<<<<< Upstream, based on origin/master
-error_reporting(E_ALL); 
-ini_set('display_errors', 1);
-=======
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
 include('user.php');
 
 //check to see if user is logging out 
@@ -104,31 +99,7 @@ if(isset($_GET['out'])) echo "Logout succesful";
             <!--/row-->
 
         </div>
-<<<<<<< Upstream, based on origin/master
-        <!-- create form -->
-        <div class="form-group">
-        <input type="text" class="form-control" name="userLogin" placeholder="Username" required />
-        <span id="check-e"></span>
-        </div>
-        
-        <div class="form-group">
-        <input type="password" class="form-control" name="userPassword" placeholder="Your Password" />
-        </div>
-       
-     	<hr />
-        
-        <div class="form-group">
-            <button type="submit" name="btn-login" class="btn btn-default">
-                	<i class="glyphicon glyphicon-log-in"></i> &nbsp; SIGN IN 
-            </button>
-        </div>  
-      	<br />
-            
-      </form>
-        </div>
-=======
         <!--/col-->
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
     </div>
     <!--/row-->
 </div>

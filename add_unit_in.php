@@ -43,11 +43,8 @@
 </nav>	
 
   <?php 
-<<<<<<< Upstream, based on origin/master
-=======
    include('protected.php');
    include('dbconfig.php');
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
   //set all variables to null so that they do not hold valiues from previous entries 
   $br = null; 
   $unitNum = null; 
@@ -62,12 +59,6 @@
 		
 		//stroe in a variable 
 		$unitID = $_GET['unitID'];
-<<<<<<< Upstream, based on origin/master
-		//establish connection to sql server 
-        $conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
-		$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-=======
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
 		//select all data for the selected unit
 		$sql = "SELECT * FROM rental_in where unitID = :unitID"; 
 		$cmd = $conn->prepare($sql); 
@@ -90,27 +81,6 @@
 		$conn = null; 
   
   ?> 
-<<<<<<< Upstream, based on origin/master
-    <!-- Create form for entering data --> 
-    <h1>Unit Details</h1>
-        <aside class="form-group">
-            <a href="unit.php" title="view Units" > View Units </a> <br> 
-        </aside>
-    <div class="panel panel-default" > 
-        <div class="panel-body">
-        <div class="col-lg-8 col-lg-offset-3">
-	<form class="form-simple" action="save_unit_in.php" method="post">
-         <div class="messages"></div>
-            <div class="controls"> 
-                <div class="row">
-                    <div class="col-md-2">   
-                        <fieldset class="form-group">
-                            <label  for="br">BR.</label>
-                                    <input  name="br" class="form-control" id="br" rows="" placeholder="Enter the Branch number"  value="<?php echo $br ; ?> " />
-                                    <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div>
-=======
     <div class="container py-2 h-100" > 
             <div class="row">
                 <div class="mx-auto col-sm-6">
@@ -132,7 +102,6 @@
                       
                                     </div>
                                     <div class="form-group row"> 
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
                     
                                         
                                         <label class="col-lg-3 col-form-label form-control-label"  for="unitNum" >Unit</label>

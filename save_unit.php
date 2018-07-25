@@ -14,15 +14,9 @@
 <a href="add_unit.php" title="add unit" > Add unit<br></a>
 
 <?php 
-<<<<<<< Upstream, based on origin/master
-ini_set("display_errors",1);
-       error_reporting(E_ALL);
- session_start();
-=======
 
  session_start();
  include('dbconfig.php');
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
 //include('inputLog.php');
 
 //store form values in variable 
@@ -97,12 +91,7 @@ if(empty($unitNum)){
 if($flag){
    
     try{
-<<<<<<< Upstream, based on origin/master
-        $conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
-		$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-=======
  
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
     
     
       //IF there is already a entry with the unitID then append that unitID, if no unitID is found then create a new ID. this is how the edit workflow is handled    
@@ -143,11 +132,7 @@ if($flag){
     $cmd->bindParam(':notes', $notes, PDO::PARAM_STR);   
    
    //bind variable to named place holder ands save inside cmd 
-<<<<<<< Upstream, based on origin/master
-    if(empty($unitID)){
-=======
    if($unitID >0){
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
         $cmd->bindParam(':unitID', $unitID, PDO::PARAM_INT);
     }
     //execute query 

@@ -28,11 +28,7 @@ putenv('LDAPTLS_REQCERT=never');
         
         
         //verify user and password 
-<<<<<<< Upstream, based on origin/master
-        if($bind = @ldap_bind($ldap, $user.$ldap_user_dom, $password)) { 
-=======
         if($bind = ldap_bind($ldap, $user.$ldap_user_dom, $password)) { 
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
             
             //valid 
             //check presence in group

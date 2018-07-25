@@ -71,24 +71,14 @@ if($flag){
    
     try{
         $conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
-<<<<<<< Upstream, based on origin/master
-	$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-=======
 		$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
     
     
       //IF there is already a entry with the unitID then append that row, if no unitID is found then create a new ID and row. this is how the edit workflow is handled    
-<<<<<<< Upstream, based on origin/master
-    if(empty($unitID)){
-        $sql = "UPDATE rental_in SET br=:br,unitNum=:unitNum,customer=:customer,clean_tank=:clean_tank,check_in_pics=:check_in_pics,quote=:quote,returned=:returned  where unitID=:unitID";
-        
-=======
     if($unitID > 0 ){
         $sql = "UPDATE rental_in SET br=:br,unitNum=:unitNum,customer=:customer,clean_tank=:clean_tank,check_in_pics=:check_in_pics,quote=:quote,returned=:returned  where unitID=:unitID"; 
 		var_dump($unitID);
 			 
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
        }
     else{
          $sql = "INSERT INTO rental_in(br, unitNum, customer, clean_tank,check_in_pics,quote,returned) VALUES (:br, :unitNum, :customer, :clean_tank, :check_in_pics, :quote,:returned)"; 
@@ -112,11 +102,7 @@ if($flag){
     
    
    //bind all paramaters to the variables and save 
-<<<<<<< Upstream, based on origin/master
-    if(empty($unitID)){
-=======
     if($unitID >0){
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
         $cmd->bindParam(':unitID', $unitID, PDO::PARAM_INT);
     }
     //execute query 

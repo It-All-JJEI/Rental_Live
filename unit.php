@@ -42,37 +42,15 @@
 	
  <!--Start of PHP -->
 	<?php
-<<<<<<< Upstream, based on origin/master
-
-include('user.php');
-
-  
-     
-=======
 //include('protected.php');
 include('user.php');
 include('dbconfig.php'); 
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
       //if the user has the required access level they will be able to view the add unit button ie rentals only 
-<<<<<<< Upstream, based on origin/master
-           if($_SESSION['access'] = 2 ){
-        echo '<a href="add_unit.php" class="btn btn-default col-sm-push-100"  title="Add Unit">+add a new Unit</a><br>';
-=======
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
        
-<<<<<<< Upstream, based on origin/master
-        };
-=======
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
   
         
     //Open connection to the database and add error mode
-<<<<<<< Upstream, based on origin/master
-	$conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
-	$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-=======
 	
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
 	$sql = "select br,unitNum,OC,moving_date,customer,target_date,eta,lease,ins,cvor,pymt,binder,check_in,check_rec,training,delivery_instructions,notes, unitID from rental_item ORDER BY unitID";
 	$cmd = $conn->prepare($sql);
     $cmd->execute(); 
@@ -142,13 +120,7 @@ include('dbconfig.php');
         //second table for check in create heading
         
         echo '<h1> Check In </h1>';
-<<<<<<< Upstream, based on origin/master
-        if($_SESSION['access'] =2){
-        echo  '<a href="add_unit_in.php" class="btn btn-default col-sm-push-100" title="Add Unit">+add a new Unit</a><br>';
-        };
-=======
        
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
         //create query for table then prepare the statment inside the connection variable and execute through the cmd variable 
 	$sql = "select br,unitNum,customer,clean_tank,check_in_pics,quote,returned ,unitID from rental_in ORDER BY unitID";
 	$cmd = $conn->prepare($sql);
@@ -182,16 +154,10 @@ include('dbconfig.php');
                      <td><input type="checkbox" value="yes"<?=$unit['check_in_pics']==1 ? "checked='checked'" : ""?> disabled></td>
                      <td><input type="checkbox" value="yes"<?=$unit['quote']==1 ? "checked='checked'" : ""?> disabled></td>
                      <td><input type="checkbox" value="yes"<?=$unit['returned']==1 ? "checked='checked'" : ""?> disabled></td>
-<<<<<<< Upstream, based on origin/master
-                    <td><a href="add_unit_in.php?unitID=<?=$unit['unitID']?>">Edit</a></td>
-                    <td><a href="delete_from_in.php?unitID=<?=$unit['unitID']?>" onclick="return confirm('Are you sure?');">
-                      Delete</a></td></tr>
-=======
                     <td><a class="btn btn-secondary"  href="add_unit_in.php?unitID=<?=$unit['unitID']?>">Edit</a></td>
                     <td><a class="btn btn-secondary" href="delete_from_in.php?unitID=<?=$unit['unitID']?>" onclick="return confirm('Are you sure?');">
                       Delete</a></td></tr>
 		</div >
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
       <?php  }   ?>
         
 		

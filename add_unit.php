@@ -45,12 +45,8 @@
 
 	
 	<?php 
-<<<<<<< Upstream, based on origin/master
-	
-=======
 	include('protected.php');
 	include('dbconfig.php');
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
 	//init variabes and keep them null to not bring over variables from last entery
 	$br = null; 
 	$unitNum = null; 
@@ -77,13 +73,7 @@
 		
 		//stroe in a variable 
 		$unitID = $_GET['unitID'];
-<<<<<<< Upstream, based on origin/master
-		
-         $conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
-		$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-=======
 	
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
 		//select all data for the selected unit
 		$sql = "SELECT * FROM rental_item where unitID = :unitID"; 
 		$cmd = $conn->prepare($sql); 
@@ -119,168 +109,12 @@
 	?> 
 	
     <!-- create form for data entry --> 
-<<<<<<< Upstream, based on origin/master
-	<h1>Unit Details</h1>
-        <aside class="form-group">
-            <a href="unit.php" title="view Units" > View Units </a> <br> 
-        </aside>
-        <div class="panel panel-default" > 
-            <div class="panel-body">
-        <div class="col-lg-8 col-lg-offset-3">
-	<form action="save_unit.php" method="post">
-         <div class="messages"></div>
-            <div class="controls"> 
-                <div class="row">
-                    <div class="col-md-2">   
-                        <fieldset class="form-group">
-                            <label  for="br">BR.</label>
-                                    <input  name="br" class="form-control" id="br" rows="" placeholder="Enter the Branch number" required value="<?php echo $br ; ?> " />
-                                    <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div>
-                    
-                    <div class="col-md-2">        
-                        <fieldset class="form-group">
-                                <label for="unitNum" >Unit</label>
-                        <input name="unitNum" id="unitNum" class="form-control" placeholder="Enter the Unit number" required value="<?php echo $unitNum ; ?> " />
-                                   <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div>
-                
-                    <div class="col-md-2">
-                        <fieldset class="form-group">
-                                <label for="OC" >OC</label>
-                                <input type="date" name="OC" id="OC" class="form-control" placeholder="Enter the OC" value="<?php echo $OC ; ?> " />
-                                <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div>
-                </div> 
-                <div class="row">
-                    <div class="col-md-2">
-                        <fieldset class="form-group">
-                                <label for="moving_date" >Moving Date</label>
-                                <input type="date" name="moving_date" class="form-control" id="moving_date" placeholder="Enter the Moving Date" value="<?php echo $moving_date ; ?> " />
-                                <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div>
-              
-                
-                    <div class="col-md-2">      
-                        <fieldset class="form-group">
-                            <label for="customer">Customer</label>
-                            <input name="customer"  class="form-control" id="customer" placeholder="Enter the Customer" value="<?php echo $customer ; ?> " />
-                            <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-2">
-                        <fieldset class="form-group">
-                        <label for="target_date"  >Target Date</label>
-                        <input type="date" name="target_date" class="form-control" id="target_date" placeholder="Enter the Target Date" value="<?php echo $target_date ; ?> " />
-                        <div class="help-block with-errors"></div>
-                        </fieldset> 
-                    </div>
-                  </div>
-                <div class="row">
-               
-                    <div class="col-md-2">
-                        <fieldset class="form-group">
-                               <label for="eta" >ETA</label>
-                               <input type="date" name="eta" class="form-control" id="eta" placeholder="ETA" value="<?php echo $eta ; ?> " />
-                               <div class="help-block with-errors"></div>
-                       </fieldset>
-                    </div>
-                </div>
-                <div class="row">
-                
-                    <div class="col-lg-1">
-                        <fieldset class="form-check form-check-inline">
-                                <label for="lease" >Lease</label>
-                                <input type="checkbox" name="lease" class=" col-md-2 checkbox" id="lease" placeholder="Lease"  value="1" <?php echo $lease ; ?>  />
-                                <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div>
-              
-                
-                    <div class="col-md-1">
-                         <fieldset class="form-check form-check-inline">
-                            <label for="ins">INS</label>
-                            <input type="checkbox" name="ins" class="col-md-2 checkbox" id="ins" placeholder="Insurance" value="1" <?php echo $ins; ?>  />
-                            <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div>   
-                    <div class="col-md-1"> 
-                        <fieldset class="form-check form-check-inline">
-                            <label for="cvor">CVOR</label>
-                            <input type="checkbox" name="cvor" class="col-md-2 checkbox" id="cvor" placeholder="CVOR" value="1"<?php echo $cvor; ?>  />
-                            <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div>
-                
-               
-                    <div class="col-md-1"> 
-                        <fieldset class="form-check form-check-inline">
-                                <label for="pymt">Pymt</label>
-                                <input type="checkbox" name="pymt" class="col-md-2 checkbox" id="pymt" placeholder="Payment"  value="1"<?php echo $pymt ; ?>  />
-                                <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-1">
-                            <fieldset class="form-check form-check-inline">
-                                 <label for="binder" >Binder</label>
-                                <input  type="checkbox" name="binder" class="col-md-2 checkbox" id="binder" placeholder="Binder" value="1"<?php echo $binder ; ?>  />
-                                <div class="help-block with-errors"></div>
-                            </fieldset>
-                    </div>
-                    <div class="col-md-2">
-                            <fieldset class="form-check form-check-inline">
-                                    <label  for="check_in">Check Out Sent</label>
-                                    <input type="checkbox"  name="check_in" id="check_in" class="col-md-2 checkbox" placeholder="Check out sent"  value="1"<?php echo $check_in ; ?>  />
-                                    <div class="help-block with-errors"></div>
-                            </fieldset>
-                    </div>
-                    </div>
-                <div class="row">
-                    <div class="col-md-2">
-                            <fieldset class="form-check form-check-inline">
-                                <label for="check_rec" >Check out Received</label>
-                                <input type="checkbox" name="check[]" id="check_rec" placeholder="Check out Received"  class="col-md-2 checkbox" value="1" <?php echo $check_rec ; ?>  />
-                                <div class="help-block with-errors"></div>
-                            </fieldset>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                            <fieldset class="form-check form-check-inline">
-                                   <label for="training" >Training</label>
-                           <input name="training" id="training" placeholder="Training" class="form-control" value="<?php echo $training ; ?> " />
-                           <div class="help-block with-errors"></div>
-                           </fieldset>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="form-check form-check-inline">
-                                <label for="delivery_instructions" >Delivery Instruction</label>
-                                <textarea  name="delivery_instructions" class="form-control" id="delivery_instructions" rows="4" placeholder="Enter the Delivery Instructions" value="<?php echo $delivery_instructions ; ?> " /></textarea>
-                        <div class="help-block with-errors"></div>
-                        </fieldset>
-                    </div> 
-                </div>
-                <div class="row">
-                        <div class="col-md-6">
-                            <fieldset class="form-check form-check-inline">
-                                    <label for="notes" >Notes</label>
-                                    <textarea  name="notes" class="form-control" id="notes" placeholder="Enter Notes" rows="4" value="<?php echo $notes ; ?> " /></textarea> 
-                                    <div class="help-block with-errors">    </div>
-                            </fieldset>
-=======
 	 <div class="container py-2" > 
             <div class="row">
                 <div class="mx-auto col-sm-8">
                     <div class="card">
                         <div class="card-header"> 
                             <h4 class="text-center mb-0">Unit Details</h4>
->>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
                         </div>
                         <div class="card-body">
                             <form class="form" role="form" autocomplete="off" action="save_unit.php" method="post">
