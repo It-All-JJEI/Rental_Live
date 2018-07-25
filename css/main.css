@@ -13,7 +13,10 @@ h1{
 	
 	text-align: center;
 }
+.scroll{
 
+	overflow-y: scroll; 
+}
 
 
 thead{

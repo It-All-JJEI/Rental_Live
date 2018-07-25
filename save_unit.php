@@ -2,14 +2,10 @@
 <html>
 <head>
     <title> saving unit... </title> 
-      <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 
 </head>
 <body> 
@@ -18,9 +14,15 @@
 <a href="add_unit.php" title="add unit" > Add unit<br></a>
 
 <?php 
+<<<<<<< Upstream, based on origin/master
 ini_set("display_errors",1);
        error_reporting(E_ALL);
  session_start();
+=======
+
+ session_start();
+ include('dbconfig.php');
+>>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
 //include('inputLog.php');
 
 //store form values in variable 
@@ -72,10 +74,6 @@ $delivery_instructions = $_POST['delivery_instructions'];
 
 $notes = $_POST['notes'];
 
-
-
-
-
  //add unit ID in case of editing        
 $unitID =$_POST['unitID'];
         
@@ -99,18 +97,25 @@ if(empty($unitNum)){
 if($flag){
    
     try{
+<<<<<<< Upstream, based on origin/master
         $conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
 		$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+=======
+ 
+>>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
     
     
       //IF there is already a entry with the unitID then append that unitID, if no unitID is found then create a new ID. this is how the edit workflow is handled    
-    if(empty($unitID)){
+    if($unitID > 0 ){
         $sql = "UPDATE rental_item SET br=:br,unitNum=:unitNum,OC=:OC,moving_date=:moving_date,customer=:customer,target_date=:target_date,eta=:eta,lease=:lease,ins=:ins,cvor=:cvor,pymt=:pymt,binder=:binder,check_in=:check_in,check_rec=:check_rec,training=:training,delivery_instructions=:delivery_instructions,notes=:notes where unitID=:unitID";
-        
+        var_dump($unitID);
+		echo'update';
        }
     else{
         $sql = "INSERT INTO rental_item (br, unitNum,OC, moving_date, customer, target_date,eta,lease,ins,cvor,pymt,binder,check_in,check_rec,training, delivery_instructions, notes) VALUES (:br, :unitNum, :OC,:moving_date, :customer, :target_date,:eta,:lease,:ins,:cvor,:pymt,:binder,:check_in,:check_rec,:training, :delivery_instructions, :notes)";    
-          }
+           var_dump($unitID);
+		   echo'insert';
+		  }
         
  
         //set up an sql command to save new unit
@@ -138,21 +143,27 @@ if($flag){
     $cmd->bindParam(':notes', $notes, PDO::PARAM_STR);   
    
    //bind variable to named place holder ands save inside cmd 
+<<<<<<< Upstream, based on origin/master
     if(empty($unitID)){
+=======
+   if($unitID >0){
+>>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
         $cmd->bindParam(':unitID', $unitID, PDO::PARAM_INT);
     }
     //execute query 
     $cmd->execute(); 
     
-    echo'<p>Unit saved Succesfully!</p>'; 
-    
-    
+    echo'<div class="alert alert-success" role="alert"> 
+	<h1 class="alert Heading">Success!</h1>
+	<p>Unit Saved</p>
+	</div>'; 
+   
    } catch(Exception $e){
         echo 'Error ' ,$e->getMessage();
     }
     
     $conn = null; 
-    header("refresh:1;url=unit.php"); 
+   header("refresh:1;url=unit.php"); 
 }
 else {
     echo 'failed';

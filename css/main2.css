@@ -30,7 +30,10 @@ form{
     align-content: center; 
     
 }
-
+input[type=checkbox]
+{
+  -webkit-appearance:checkbox;
+}
 
 a{
 	

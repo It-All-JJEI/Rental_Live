@@ -2,40 +2,77 @@
 <html>
 <head>
     <meta content="text/html;" charset="utf-8" http-equiv="content-type">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/main.css" type="text/css">
 	
 <meta charset="utf-8">
 <title>Unit</title>
 </head>
-<!-- add login link to a page  -->
-<a href="login.php?out=1" class="btn btn-info "> Logout</a>
+
 <body>
-	
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="unit.php">Rentals Monitor</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Add Unit
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="add_unit.php">Check Out</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="add_unit_in.php">Check In</a>
+          
+          
+        </div>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+        <a class="nav-light" href="login.php?out=1">Logout <span class="sr-only">(current)</span></a>
+    </form>
+  </div>
+</nav>		
 	
  <!--Start of PHP -->
 	<?php
+<<<<<<< Upstream, based on origin/master
 
 include('user.php');
 
   
      
+=======
+//include('protected.php');
+include('user.php');
+include('dbconfig.php'); 
+>>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
       //if the user has the required access level they will be able to view the add unit button ie rentals only 
+<<<<<<< Upstream, based on origin/master
            if($_SESSION['access'] = 2 ){
         echo '<a href="add_unit.php" class="btn btn-default col-sm-push-100"  title="Add Unit">+add a new Unit</a><br>';
+=======
+>>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
        
+<<<<<<< Upstream, based on origin/master
         };
+=======
+>>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
   
         
     //Open connection to the database and add error mode
+<<<<<<< Upstream, based on origin/master
 	$conn = new PDO("sqlsrv:Server=SQL-PRD-01; Database=Rentals_Spreadsheet", "sa" , "Truck34sail" ); 
 	$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+=======
+	
+>>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
 	$sql = "select br,unitNum,OC,moving_date,customer,target_date,eta,lease,ins,cvor,pymt,binder,check_in,check_rec,training,delivery_instructions,notes, unitID from rental_item ORDER BY unitID";
 	$cmd = $conn->prepare($sql);
     $cmd->execute(); 
@@ -92,10 +129,10 @@ include('user.php');
                     
                    <?php if(($_SESSION['access'] =2)){ ?> 
                     <!--add in editing buttons for editing deleting and checking in  -->         
-                    <td><a href="add_unit.php?unitID=<?= $unit['unitID']?>">Edit</a></td>
-                    <td><a href="delete_unit.php?unitID=<?= $unit['unitID']  ?>" onclick="return confirm('Are you sure?')">
+                    <td><a class="btn btn-secondary" href="add_unit.php?unitID=<?= $unit['unitID']?>">Edit</a></td>
+                    <td><a class="btn btn-secondary" href="delete_unit.php?unitID=<?= $unit['unitID']  ?>" onclick="return confirm('Are you sure?')">
                       Delete</a></td>
-                    <td><a href="move.php?unitID=<?= $unit['unitID'] ?>" onclick="return confirm('Do you want to Move to Check In?')">Check In </a></td></tr>
+                    <td><a class="btn btn-secondary" href="move.php?unitID=<?= $unit['unitID'] ?>" onclick="return confirm('Do you want to Move to Check In?')">Check In </a></td></tr>
                
         </div>      
                    <?php } }                 
@@ -105,9 +142,13 @@ include('user.php');
         //second table for check in create heading
         
         echo '<h1> Check In </h1>';
+<<<<<<< Upstream, based on origin/master
         if($_SESSION['access'] =2){
         echo  '<a href="add_unit_in.php" class="btn btn-default col-sm-push-100" title="Add Unit">+add a new Unit</a><br>';
         };
+=======
+       
+>>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
         //create query for table then prepare the statment inside the connection variable and execute through the cmd variable 
 	$sql = "select br,unitNum,customer,clean_tank,check_in_pics,quote,returned ,unitID from rental_in ORDER BY unitID";
 	$cmd = $conn->prepare($sql);
@@ -133,6 +174,7 @@ include('user.php');
 	
 	foreach($units as $unit){ ?> 
 		<!--loop through units and get individual columns --> 
+		<div class="scoll"> 
 		<tr><td><?=$unit['br']?></td>
                     <td><?=$unit['unitNum']?></td>
                     <td><?=$unit['customer']?></td>
@@ -140,9 +182,16 @@ include('user.php');
                      <td><input type="checkbox" value="yes"<?=$unit['check_in_pics']==1 ? "checked='checked'" : ""?> disabled></td>
                      <td><input type="checkbox" value="yes"<?=$unit['quote']==1 ? "checked='checked'" : ""?> disabled></td>
                      <td><input type="checkbox" value="yes"<?=$unit['returned']==1 ? "checked='checked'" : ""?> disabled></td>
+<<<<<<< Upstream, based on origin/master
                     <td><a href="add_unit_in.php?unitID=<?=$unit['unitID']?>">Edit</a></td>
                     <td><a href="delete_from_in.php?unitID=<?=$unit['unitID']?>" onclick="return confirm('Are you sure?');">
                       Delete</a></td></tr>
+=======
+                    <td><a class="btn btn-secondary"  href="add_unit_in.php?unitID=<?=$unit['unitID']?>">Edit</a></td>
+                    <td><a class="btn btn-secondary" href="delete_from_in.php?unitID=<?=$unit['unitID']?>" onclick="return confirm('Are you sure?');">
+                      Delete</a></td></tr>
+		</div >
+>>>>>>> b1499b5 Removed database connnections in all pages and moved to dbconfig.php not committed to git 
       <?php  }   ?>
         
 		

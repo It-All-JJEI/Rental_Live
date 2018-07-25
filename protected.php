@@ -6,8 +6,6 @@ if(!isset($_SESSION['user'])){
     //user is not logged in redirect to login 
     header("Location:login.php");
     die(); 
-}else{
-    header("Location:unit.php");
 }
 
 //if($_SESSION['access'] != 2){
